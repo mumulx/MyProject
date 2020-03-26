@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>三维模型质量检查后台登录</title>
+		<script src="../../js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			#div1{
+				height: 100%;
+				width: 100%;
+				background-color:#01B1EA;
+				box-sizing: border-box;
+				left: 0;
+				top: 0;
+				position: absolute;
+			}
+			#div2{
+				display: block;
+				left: 490px;
+				top: 87px;
+				border: 3px solid #EAF2FF;
+				background: #EAF2FF;
+				margin: auto;
+				height: 200px;
+				width: 300px;
+				position: absolute;
+				border-radius: 5px;
+			}
+			#divtitle{
+				left: 0px;
+				top: 0px;
+				position: relative;
+				font-size: 14px;
+				font-weight: bold;
+				color: #0E2D5F;
+				height: 30px;
+				line-height: 16px;
+				background: #EAF2FF;
+				padding-left: 20px;
+				padding-top: 5px;
+				-moz-user-select: none;
+			}
+			#formBody{
+				background: #fff;
+				height: 160px;
+				margin-left: 5px;
+				margin-right: 5px;	
+				-moz-user-select: none;			
+			}
+			#formBody form p{
+				
+				height: 22px;
+				line-height: 22px;
+				padding: 20px 0 0 25px;
+				color: #000000;
+				font-size: 14px;	
+				text-align: left;			
+				
+			}
+			#formBody form input{
+				position: relative;
+				border: 1px solid #95B8E7;
+				background-color: #fff;
+				vertical-align: middle;
+				display: inline-block;
+				overflow: hidden;
+				white-space: nowrap;
+				margin: 0;
+				border-radius: 5px;
+				height: 20px;
+				width: 150px;
+				margin-left: 10px ;
+			}
+			#submitDiv{
+				left: 0;
+				top: 0px;
+				position: relative;
+				background: #F4F4F4;
+				height: 34px;
+				padding: 5px;
+				box-sizing: border-box;
+				text-align:center;
+			}
+			#submitDiv button{
+				border: 1px solid #b7d2ff;				
+				box-sizing: border-box;
+				border-radius: 5px;
+				width: 70px;
+				height: 28px;
+				cursor: pointer;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<dir id="div1">
+			<div id="div2">
+				<div id="divtitle">
+					登录后台
+				</div>
+				<div id="formBody">
+					
+					<form action="admin_index.html" method="get">
+						<p>
+							登录账号:<input type="text" id="adminName" />
+						</p>
+						<p>
+							登录密码:<input type="password" id="adminPwd" />
+						</p>
+						<p style="display: none;">
+							<input id="submitForm" type="submit" value="登录"/>
+						<p>
+						
+					</form>
+					<div id="submitDiv">
+						<button id="submitButton">登录</button>
+					</div>
+				</div>
+			</div>
+		</dir>
+		<script>
+			$(document).ready(function() {
+				$("#submitButton").mouseover(function(){
+					$(this).css("background","#b7d2ff");
+				});
+				$("#submitButton").mouseout(function(){
+					$(this).css("background","#F4F4F4");
+				});
+				$("#submitButton").click(function(){
+					var adminName = $("#adminName").val();
+					var adminPwd=$("#adminPwd").val();
+					console.log(adminName+adminPwd);
+					if(!adminName){
+						alert("账号不能为空");
+						return;
+					}
+					if(!adminPwd){
+						alert("账号不能为空");
+						return;
+					}
+					
+					return $("#submitForm").click();
+				});
+				$("#submitForm").click(function(){
+						
+					
+				});
+				
+			});
+			
+			
+		</script>
+		
+		
+		
+		
+	</body>
+</html>

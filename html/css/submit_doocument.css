@@ -1,0 +1,484 @@
+@charset "utf-8";
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#header {
+	width: 100%;
+	height: 65px;
+	margin-top: 0px;
+	background-color: #293C55;
+	float: left;
+	position: absolute;
+}
+
+#logo {
+	width: 300px;
+	height: 65px;
+	text-align: center;
+	float: left;
+	position: relative;
+	margin-left: 100px;
+	margin-top: 20px;
+}
+
+#logo a span {
+	font-family: "华文行楷";
+	font-size: 30px;
+	text-decoration: none;
+	color: #FFFFFF;
+	float: left;
+}
+
+#nav1 {
+	float: left;
+	margin: 0 auto;
+	background-color: #293C55;
+	width: 650px;
+	position: absolute;
+	line-height: 65px;
+	top: 0;
+	left: 400px;
+	box-sizing: border-box;
+	z-index: 9;
+}
+
+#nav1 a {
+	padding: 0 30px;
+	float: left;
+	display: inline-block;
+	text-decoration: none;
+	color: #FFFFFF;
+	height: 65px;
+}
+
+#nav1 .active {
+	background: rgba(0, 0, 0, .2);
+}
+
+#login {
+	float: left;
+	margin: 0 auto;
+	background-color: #293C55;
+	width: 90px;
+	position: absolute;
+	line-height: 65px;
+	top: 0;
+	right: 0px;
+	box-sizing: border-box;
+	height: 65px;
+	overflow: hidden;
+}
+
+#header #login a {
+	padding: 0 2px;
+	float: left;
+	display: inline-block;
+	text-decoration: none;
+	height: 65px;
+}
+
+#header #login a span {
+	margin: 0 auto;
+	font: 12px 微软雅黑;
+	height: 65px;
+	color: #FFFFFF;
+	line-height: 65px;
+}
+
+#login i {
+	margin-top: 26px;
+	color: #fff;
+	float: left;
+	font: 12px 微软雅黑;
+	height: 65px;
+}
+
+#header #login a.active {
+	background: rgba(0, 0, 0, .2);
+}
+
+a {
+	text-decoration: none;
+}
+
+#box {
+	height: 91%;
+	width: 100%;
+	position: absolute;
+	top: 65px;
+	box-sizing: border-box;
+	/*	background-color: #F0F3F6;
+*/
+}
+
+#box1 {
+	top: 65px;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	position: fixed;
+	overflow-y: auto;
+	padding: 25px 0 75px;
+	width: 250px;
+	box-shadow: 0 8px 12px #ebedf0;
+	border-right: 1px solid #f1f4f8;
+	background-color: #E8E8E8;
+}
+
+#choiceFile {
+	position: relative;
+	box-sizing: border-box;
+	padding: 0;
+	top: 0;
+	display: block;
+}
+
+#choiceTitle {
+	height: 40px;
+	position: relative;
+	padding: 0;
+	top: 0;
+	line-height: 40px;
+	margin: 0 auto;
+	-moz-user-select: none;
+	cursor: pointer;
+}
+
+#choiceTitle a {
+	padding: 10px 10px 10px 30px;
+	font-size: 18px;
+	font-family: "黑体";
+	color: #455A64;
+}
+
+#choiceFile1 {
+	height: 40px;
+	position: relative;
+	padding: 0;
+	top: 0;
+	line-height: 36px;
+	margin: 0 auto;
+	display: none;
+	-moz-user-select: none;
+	cursor: pointer;
+}
+
+#choiceFile1.active {
+	background-color: #FFF;
+	border-left: 5px solid red;
+}
+
+#choiceFile1 a {
+	padding: 10px 10px 10px 30px;
+	font-size: 15px;
+	font-family: "新宋体";
+	color: #455A64;
+}
+
+#choiceFile1 a.active {
+	color: #19A0FB;
+}
+
+#choiceRule {
+	position: relative;
+	padding: 0;
+	top: 0px;
+	line-height: 40px;
+	margin: 0 auto;
+	display: none;
+}
+
+#submitFile {
+	position: relative;
+	padding: 0;
+	top: 0px;
+	line-height: 40px;
+	margin: 0 auto;
+	display: none;
+}
+
+#box2 {
+	width: 78%;
+	top: 0px;
+	left: 250px;
+	position: relative;
+	-moz-user-select: none;
+}
+
+#box2 #box2daohang h1 {
+	width: 100%;
+	padding: 10px 10px 10px 10px;
+	position: relative;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 30px;
+	/*background-color: #E8E8E8;
+	border: 1px solid #ccc;	*/
+	color: #399AB2;
+	text-shadow: 0 -1px 8px rgba(0, 0, 0, .4);
+	cursor: pointer;
+}
+
+#box2 p {
+	text-indent: 4em;
+}
+
+#box2 h3 {
+	text-indent: 2em;
+}
+
+#box3 {
+	width: 80%;
+	height: 100%;
+	top: 0px;
+	left: 250px;
+	position: relative;
+	display: none;
+	float: left;
+	/*background-color: #F0F3F6;*/
+}
+
+#box3 #showFile {
+	width: 300px;
+	height: 100%;
+	top: 0;
+	left: 60px;
+	position: relative;
+	float: left;
+	background-color: #DCE2F1;
+	display: none;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+}
+
+#box3 #showFile #FileTable {
+	top: 130px;
+	left: 308px;
+	bottom: 0;
+	z-index: 1;
+	position: fixed;
+	overflow-y: auto;
+	overflow-x: scroll;
+	width: 300px;
+	min-height: 360px;
+	box-shadow: 0 8px 12px #ebedf0;
+	-moz-user-select: none;
+}
+
+#box3 #showFile #FileTable ul {
+	min-width: 100px;
+	white-space: nowrap;
+}
+
+#box3 #showFile #FileTable li:nth-of-type(odd) {}
+
+#box3 #showFile #FileTable li:nth-of-type(even) {}
+
+#box3 #showFile #FileTable li {
+	padding-left: 10px;
+	line-height: 50px;
+	font-size: 17px;
+	list-style: none;
+	cursor: pointer;
+	margin: 0px auto;
+	border-bottom: 2px solid #EEF2F5;
+}
+
+#box3 #showFile #FileTable li input[type="checkbox"] {
+	width: 17px;
+	height: 17px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: baseline;
+	line-height: 17px;
+	position: relative;
+	border-radius: 30%;
+	outline: none;
+	-webkit-appearance: none;
+	border: 0px solid #A0ADFE;
+	-webkit-tab-highlight-color: rgba(0, 0, 0, 0);
+	color: #fff;
+	background: #A0ADFE;
+	cursor: pointer;
+	box-sizing: border-box;
+	vertical-align: middle
+}
+
+#box3 #showFile #FileTable li input[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #A0ADFE;
+	width: 100%;
+	height: 100%;
+	border: 0px solid #A0ADFE;
+	border-radius: 30%;
+	color: #fff;
+}
+
+#box3 #showFile #FileTable li input[type="checkbox"]:checked::before {
+	content: "\2714";
+	background-color: #657AFE;
+	border: 0px solid #657AFE;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 30%;
+}
+
+#box3 #showFile #FileTable li input[type="checkbox"]:disabled::before {
+	background: #eee;
+	cursor: pointer;
+}
+
+#box3 #fileOpreation {
+	width: 100px;
+	height: 100%;
+	top: 0;
+	left: 60px;
+	position: relative;
+	float: left;
+	background-color: #FFF4E6;
+	overflow: hidden;
+	display: none;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+}
+
+#buttonDiv {
+	float: left;
+	border: 2px;
+	width: 80px;
+	height: 40px;
+	font-size: 20px;
+	margin: 0 auto;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	padding-left: 5px;
+}
+
+#buttonDiv button {
+	float: left;
+	border: 2px;
+	background-color: #F1AAA6;
+	color: #FFFFFF;
+	width: 90px;
+	height: 40px;
+	font-size: 16px;
+	cursor: pointer;
+	margin: 0 auto;
+	border-radius: 14px;
+}
+
+#box3 #showRule {
+	background-color: #DCE2F1;
+	width: 300px;
+	height: 100%;
+	top: 0;
+	left: 130px;
+	position: relative;
+	float: left;
+	display: none;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+}
+
+#box3 #showRule #RuleTable {
+	top: 130px;
+	left: 780px;
+	bottom: 0;
+	z-index: 1;
+	position: fixed;
+	overflow-y: auto;
+	overflow-x: scroll;
+	width: 300px;
+	min-height: 360px;
+	box-shadow: 0 8px 12px #ebedf0;
+	-moz-user-select: none;
+}
+
+#box3 #showRule #RuleTable ul {
+	min-width: 100px;
+	white-space: nowrap;
+}
+
+#box3 #showRule #RuleTable li {
+	padding-left: 10px;
+	line-height: 50px;
+	font-size: 17px;
+	list-style: none;
+	cursor: pointer;
+	border-bottom: 2px solid #EEF2F5;
+}
+
+#box3 #showRule #RuleTable li input[type="checkbox"] {
+	width: 17px;
+	height: 17px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: baseline;
+	line-height: 17px;
+	position: relative;
+	border-radius: 30%;
+	outline: none;
+	-webkit-appearance: none;
+	border: 0px solid #A0ADFE;
+	-webkit-tab-highlight-color: rgba(0, 0, 0, 0);
+	color: #fff;
+	background: #A0ADFE;
+	cursor: pointer;
+	box-sizing: border-box;
+	vertical-align: middle
+}
+
+#box3 #showRule #RuleTable li input[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #A0ADFE;
+	width: 100%;
+	height: 100%;
+	border: 0px solid #A0ADFE;
+	border-radius: 30%;
+	color: #fff;
+}
+
+#box3 #showRule #RuleTable li input[type="checkbox"]:checked::before {
+	content: "\2714";
+	background-color: #657AFE;
+	border: 0px solid #657AFE;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 30%;
+}
+
+#box3 #showRule #RuleTable li input[type="checkbox"]:disabled::before {
+	background: #eee;
+	cursor: pointer;
+}
+
+#box3 #ruleOpreation {
+	width: 100px;
+	height: 100%;
+	top: 0;
+	left: 130px;
+	position: relative;
+	float: left;
+	background-color: #FFF4E6;
+	display: none;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+}

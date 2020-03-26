@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>提交文件</title>
+		<script src="../js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/submit_document.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/submit_doocument.css"/>
+	</head>
+	<body>
+		<script src="../js/body_bg.js" type="text/javascript" charset="utf-8"></script>
+		<div id="header">
+			<div id="logo">
+				<a href="index.html"><span>三维模型质量检查</span></a>
+
+			</div>
+			<div id="nav1">
+				<a href="index.html">首页</a>
+				<a href="myProject.html">项目管理</a>
+				<a class="active" href="#">提交文件</a>
+				<a href="record_submit.html">提交记录</a>
+				<a href="#">关于帮助</a>
+
+			</div>
+			<div id="login">
+				<a href="#"><span>登录</span></a>
+				<i>｜</i>
+				<a href="#"><span>注册</span></a>
+			</div>
+		</div>
+
+		<!--提交文件-->
+		<div id="box">
+			<div id="box1">
+
+				<div id="choiceFile">
+					<div id="choiceTitle">
+						<a href="#"><b>选择文件</b></a>
+
+					</div>
+					<div id="choiceFile1">
+						<form action="" method="post" id="myForm" style="display: none;">
+						</form>
+						<a href="#">选择单个文件</a>
+						<input type="file" name="FileGet1" accept=".prt" style="display: none;" />
+					</div>
+					<div id="choiceFile1">
+						<a href="#">选择多个文件</a>
+						<input type="file" name="FileGet2" accept=".prt" multiple="multiple" style="display: none;" />
+					</div>
+
+					<div id="choiceFile1">
+						<a href="#">选择目录下的所有文件</a>
+						<input type="file" name="FileGet3" style="display: none;" webkitdirectory/>
+					</div>
+				</div>
+				<div id="choiceRule">
+					<div id="choiceTitle">
+						<a href="#"><b>选择规则</b></a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#" class="active">特征数</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">11111</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">2222</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">3333</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">4444</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">5555</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">6666</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">7777</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">8888</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">9</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">10</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">1111111111111111111111111</a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#">12</a>
+					</div>
+				</div>
+				<div id="submitFile">
+					<div id="choiceTitle">
+						<a href="#"><b>提交文件</b></a>
+					</div>
+					<div id="choiceFile1">
+						<a href="#" class="active">提交</a>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="box2">
+				<div id="box2daohang">
+					<h1>提交注意事项及操作流程</h1>
+				</div>
+				<h3>提交文件操作流程</h3><br />
+				
+					<p >1.点击左侧选择文件进行文件选择</p> 
+					<p >2.选择检查规则</p>
+					<p >3.提交文件 </p>
+				<br/>
+				<h3>注意事项：</h3><br/>
+				
+				<p>1.选择文件</p><br />
+				<p>文件类型必须是.prt文件。</p>
+				<p>ie浏览器可能不支持多文件上传，因此建议使用单独文件上传</p>
+				<p>多文件不能上传建议更换浏览器(如火狐)</p>
+
+				<p>2.选择规则</p>
+				<p>鼠标左键双击规则就可以快速添加规则</p>
+				<p>检查规则可以多选</p>	
+				<p>规则不能重复，保留唯一性，不会提示重复信息</p>
+				<p>3.提交文件</p>
+				
+			</div>
+			<div id="box3">
+				<div id="showFile">
+					<span id="" style="color: #399AB2; text-shadow: 0px -1px 8px rgba(0,0,0,.4); font-size: 18px;font-family: '微软雅黑';line-height: 65px; "><center>已选文件显示</center></span>
+					<hr style="border: 1px solid #CCCCCC;" />
+					<br />
+
+					<div id="FileTable">
+						<ul>
+							<li><input type="checkbox" name="filename" value="0" />&nbsp;&nbsp;<span style="color: #1FAD4E;">文件名</span></li>
+						</ul>
+					</div>
+				</div>
+				<div id="fileOpreation">
+					<br /><br /><br />
+					<div id="buttonDiv">
+						<button value="">移除选定</button><br /><br />
+					</div>
+					<div id="buttonDiv">
+						<button value="">全部移除</button><br /><br />
+					</div>
+					<div id="buttonDiv">
+						<button value="">提交文件</button><br /><br />
+					</div>
+				</div>
+				<div id="showRule">
+					<span id="" style="color: #399AB2; text-shadow: 0px -1px 8px rgba(0,0,0,.4); font-size: 18px;font-family: '微软雅黑';line-height: 65px; "><center>已选规则显示</center></span>
+					<hr style="border: 1px solid #CCCCCC;" />
+
+					<div id="RuleTable">
+						<ul>
+							<li><input type="checkbox" name="filename" value="0" />&nbsp;&nbsp;<span style="color: #1FAD4E;">规则名</span></li>
+						</ul>
+					</div>
+				</div>
+				<div id="ruleOpreation">
+					<br /><br /><br />
+					<div id="buttonDiv">
+						<button value="">移除选定</button>
+					</div>
+					<div id="buttonDiv">
+						<button value="">全部移除</button><br /><br />
+					</div>
+					<div id="buttonDiv">
+						<button value="">一键添加</button><br /><br />
+					</div>
+					
+					
+					
+					
+				</div>
+			</div>
+		</div>
+		
+
+	</body>
+
+</html>

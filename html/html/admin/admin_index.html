@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>后台管理系统</title>
+		<script src="../../js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			
+			#div1 {
+				top: 0px;
+				left: 0px;
+				height: 100%;
+				width: 100%;
+				box-sizing: border-box;
+				position: absolute;
+				background: #E0ECFF;
+			}
+			
+			#header {
+				top: 0px;
+				left: 0px;
+				height: 60px;
+				width: 100%;
+				box-sizing: border-box;
+				position: relative;
+				background: #01B1EA;
+			}
+			
+			#header_logo {
+				position: absolute;
+				left: 0px;
+				width: 300px;
+				height: 60px;
+				top: 0px;
+				cursor: pointer;
+				font-size: 20px;
+				color: #fff;
+				line-height: 50px;
+				margin: 0 auto;
+				margin-left: 50px;
+				padding-left: 20px;
+				-moz-user-select: none;
+			}
+			
+			#header_userinfo {
+				position: absolute;
+				right: 0px;
+				width: 150px;
+				height: 60px;
+				top: 0px;
+				font-size: 15px;
+				color: #fff;
+				line-height: 50px;
+				margin: 0 auto;
+				margin-right: 10px;
+				padding-left: 20px;
+				-moz-user-select: none;
+				cursor: pointer;
+			}
+			
+			#header_userinfo a {
+				padding-left: 2px;
+				text-decoration: none;
+				color: #fff;
+			}
+			
+			#header_userinfo a:hover {
+				color: black;
+			}
+			
+			#div2 {
+				position: absolute;
+				left: 0px;
+				top: 60px;
+				width: 217px;
+				border: 1px blue;
+				box-sizing: border-box;
+				z-index: 2;
+				bottom: 45px;
+				overflow: auto;
+				-moz-user-select: none;
+				color: rgba(0, 0, 0, .7);
+				background: #fff;
+			}
+			
+			#div2_overFlow {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				box-sizing: border-box;
+				z-index: 2;
+				bottom: 0px;
+				width: 200px;
+				overflow: hidden;
+			}
+			
+			#div_header {
+				position: relative;
+				top: 0;
+				left: 0;
+				height: 32px;
+				box-sizing: border-box;
+				background: #fff;
+				right: 0;
+				font-size: 16px;
+				margin: 0px auto;
+				padding-left: 15px;
+				line-height: 32px;
+				cursor: pointer;
+			}
+			
+			#div2_one {
+				position: relative;
+				top: 0;
+				left: 0;
+				height: 32px;
+				box-sizing: border-box;
+				background: #fff;
+				right: 0;
+				font-size: 15px;
+				cursor: pointer;
+				padding: 5px;
+				padding-left: 20px;
+				padding-right: 20px;
+				color: #d1d1d1;
+				width: 200px;
+			}
+			
+			#div2_one:hover {
+				background: #d1d1d1;
+				border-left: 5px solid #01B1EA;
+			}
+			
+			#div2_one a {
+				color: rgba(0, 0, 0, .7);
+				text-decoration: none;
+			}
+			
+			#div2_one i {
+				font-style: normal;
+				float: right;
+				font-size: 16px;
+				color: rgba(0, 0, 0, .7);
+			}
+			
+			#div2_two {
+				position: relative;
+				top: 0;
+				left: 0;
+				height: 32px;
+				box-sizing: border-box;
+				background: #fff;
+				right: 0;
+				font-size: 15px;
+				padding: 5px;
+				cursor: pointer;
+				padding-left: 35px;
+				width: 200px;
+			}
+			
+			#div2_two:hover {
+				background: #d1d1d1;
+				border-left: 5px solid #01B1EA;
+			}
+			
+			#div2_two a {
+				color: rgba(0, 0, 0, .7);
+				text-decoration: none;
+			}
+			
+			#div3 {
+				position: absolute;
+				left: 200px;
+				top: 60px;
+				right: 0px;
+				background: #E0ECFF;
+				box-sizing: border-box;
+				z-index: 2;
+				bottom: 45px;
+				overflow: hidden;
+				overflow-y: auto;
+			}
+			
+			#div3_header {
+				position: relative;
+				top: 0px;
+				left: 0px;
+				height: 40px;
+				box-sizing: border-box;
+				font-size: 16px;
+				margin: 0px auto;
+				padding-left: 24px;
+				line-height: 30px;
+				cursor: pointer;
+				float: left;
+				width: 100%;
+				overflow-y: hidden;
+				-moz-user-select: none;
+			}
+			
+			#div3_header_part {
+				float: left;
+				background: #E0ECFF;
+				border: 1px solid #95B8E7;
+				border-bottom: none;
+				border-radius: 10px;
+				padding: 3px;
+				padding-left: 15px;
+				padding-right: 10px;
+				padding-top: 0px;
+				box-sizing: border-box;
+				margin: auto;
+				line-height: 30px;
+				margin-right: 2px;
+				margin-left: 2px;
+				margin-top: 5px;
+				position: relative;
+				height: 50px;
+				-moz-user-select: none;
+			}
+			
+			#div3_header .active {
+				background: #fff;
+			}
+			
+			#div3_header_part a:hover {
+				color: red;
+			}
+			
+			#div3_body {
+				position: absolute;
+				padding-left: 4px;
+				box-sizing: border-box;
+				background: #fff;
+				width: 100%;
+				top: 40px;
+				bottom: 0px;
+				margin-left: 8px;
+				-moz-user-select: none;
+				overflow-y: auto;
+			}
+			
+			#div4 {
+				position: absolute;
+				left: 0px;
+				right: 0px;
+				background: #E0ECFF;
+				box-sizing: border-box;
+				z-index: 2;
+				bottom: 0px;
+				height: 45px;
+				overflow: hidden;
+				margin: 0 auto;
+				line-height: 45px;
+				-moz-user-select: none;
+			}
+			
+			#div3_body_addUserInfo {
+				float: left;
+				text-align: right;
+			}
+			
+			#div3_body_addUserInfo button {
+				margin: auto;
+				height: 30px;
+				width: 50px;
+				border-radius: 5px;
+				margin-left: 15px;
+				margin-right: 15px;
+				background: #eaf2ff;
+				color: #000000;
+				border: 1px solid #b7d2ff;
+				cursor: pointer;
+			}
+			
+			#addUserInfo_input {
+				height: 50px;
+				box-sizing: border-box;
+				padding: 10px;
+				padding-left: 50px;
+				font-size: 16px;
+				line-height: 30px;
+			}
+			
+			#addUserInfo_input span {
+				width: 200px;
+			}
+			
+			#addUserInfo_button {
+				padding-left: 150px;
+				padding-top: 30px;
+				width: 200px;
+			}
+			
+			#addUserInfo_input input {
+				margin-left: 50px;
+				border: 1px solid #01B1EA;
+				width: 200px;
+				height: 22px;
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="div1">
+			<div id="header">
+				<div id="header_logo">
+
+					三维建模后台管理系统
+				</div>
+				<div id="header_userinfo">
+					您好，a&nbsp;|
+					<a href="login.html">退出</a>
+				</div>
+			</div>
+			<div id="div2_overFlow">
+
+				<div id="div2">
+					<div id="div_header">
+						&equiv;&nbsp;&nbsp;导航
+					</div>
+					<div id="div2_one">
+						<a href="#">用户管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">添加用户</a>
+					</div>
+					<div id="div2_two">
+						<a href="#">用户管理</a>
+					</div>
+
+					<div id="div2_one">
+						<a href="#">项目管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">添加项目</a>
+					</div>
+					<div id="div2_two">
+						<a href="#">项目管理</a>
+					</div>
+
+					<div id="div2_one">
+						<a href="#">规则管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">添加规则</a>
+					</div>
+					<div id="div2_two">
+						<a href="#">规则管理</a>
+					</div>
+
+					<div id="div2_one">
+						<a href="#">项目成员管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">添加项目成员</a>
+					</div>
+					<div id="div2_two">
+						<a href="#">项目成员管理</a>
+					</div>
+					<div id="div2_one">
+						<a href="#">提交记录管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">添加提交记录</a>
+					</div>
+					<div id="div2_two">
+						<a href="#">提交记录管理</a>
+					</div>
+					<div id="div2_one">
+						<a href="#">查询结果管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">添加查询结果</a>
+					</div>
+					<div id="div2_two">
+						<a href="#">查询结果管理</a>
+					</div>
+					<div id="div2_one">
+						<a href="#">系统管理</a>
+						<i>&or;</i>
+					</div>
+					<div id="div2_two">
+						<a href="#">修改密码</a>
+					</div>
+					<div id="div2_two">
+						<a href="login.html">退出</a>
+					</div>
+
+				</div>
+			</div>
+			<div id="div3">
+				<div id="div3_header">
+					<div class="active" id="div3_header_part">起始页&nbsp;
+						<a>&times;</a>
+					</div>
+				</div>
+				<div id="div3_body">
+					<div id="div3_body_index">
+						<center>
+							<p style="font-size: 70px; margin: 0 auto; line-height: 400px;">欢迎来到后台管理系统!</p>
+						</center>
+
+					</div>
+					<div id="div3_body_addUserInfo" style="display: none;">
+						<form action="" method="post">
+							<div id="addUserInfo_input">
+								<span>账号：</span><input type="text" /><br />
+							</div>
+							<div id="addUserInfo_input">
+								<span>密码：</span><input type="text" /><br />
+							</div>
+							<div id="addUserInfo_input">
+								<span>昵称：</span><input type="text" /><br />
+							</div>
+							<div id="addUserInfo_input">
+								<span>性别：</span><input type="text" /><br />
+							</div>
+							<div id="addUserInfo_input">
+								<span>年龄：</span><input type="text" /><br />
+							</div>
+							<div id="addUserInfo_input">
+								<span>联系电话：</span><input type="text" /><br />
+							</div>
+							<div id="addUserInfo_input">
+								<span>家庭住址：</span><input type="text" /><br />
+							</div>
+							<input style="display: none;" type="submit" value="提交" />
+						</form>
+						<div id="addUserInfo_button">
+							<button id="addUserInfo_submit">提交</button>
+							<button id="addUserInfo_regit">重置</button>
+						</div>
+					</div>
+					<div id="div3_body_manageUserInfo" style="display: none;">
+						用户管理
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					</div>
+					<div id="div3_body_addteamProject" style="display: none;">添加项目</div>
+					<div id="div3_body_manageteamProject" style="display: none;">项目管理</div>
+					
+					<div id="div3_body_addRule" style="display: none;">添加规则</div>
+					<div id="div3_body_manageRule" style="display: none;">规则管理</div>
+					<div id="" style="display: none;">添加项目成员</div>
+					<div id="" style="display: none;">项目成员管理</div>
+					<div id="" style="display: none;">添加提交记录</div>
+					<div id="" style="display: none;">提交记录管理</div>
+					<div id="" style="display: none;">添加查询结果</div>
+					<div id="" style="display: none;">查询结果管理</div>
+					<div id="div3_body_upadtepwd" style="display: none;">修改密码</div>
+					
+				
+				
+				</div>
+			</div>
+			<div id="div4">
+				<center>
+					<p>三维模型质量检查</p>
+				</center>
+
+			</div>
+
+		</div>
+		<!--div1 -->
+		<script>
+			$(document).ready(function() {
+
+				$("#div2").children("#div2_one").each(function() {
+					$(this).click(function() {
+						if($(this).next("#div2_two").css("display") == "none") {
+							$(this).next("#div2_two").css("display", "block");
+
+							$($(this).children("i")[0]).html("&or;");
+						} else {
+							$(this).next("#div2_two").css("display", "none");
+							$($(this).children("i")[0]).html("&and;");
+						}
+						if($(this).next("#div2_two").next("#div2_two").css("display") == "none") {
+							$(this).next("#div2_two").next("#div2_two").css("display", "block");
+							$($(this).children("i")[0]).html("&or;");
+						} else {
+							$(this).next("#div2_two").next("#div2_two").css("display", "none");
+							$($(this).children("i")[0]).html("&and;");
+						}
+					});
+
+				});
+				var div_header_isopen = true;
+				$("#div_header").click(function() {
+					//alert(122);
+					if(div_header_isopen) {
+						$("#div2").children("#div2_one").each(function() {
+							if($(this).next("#div2_two").css("display") == "none") {} else {
+								$(this).next("#div2_two").css("display", "none");
+								$($(this).children("i")[0]).html("&and;");
+							}
+							if($(this).next("#div2_two").next("#div2_two").css("display") == "none") {} else {
+								$(this).next("#div2_two").next("#div2_two").css("display", "none");
+								$($(this).children("i")[0]).html("&and;");
+							}
+						});
+						div_header_isopen = false;
+					} else {
+						$("#div2").children("#div2_one").each(function() {
+							if($(this).next("#div2_two").css("display") == "none") {
+								$(this).next("#div2_two").css("display", "block");
+
+								$($(this).children("i")[0]).html("&or;");
+							}
+							if($(this).next("#div2_two").next("#div2_two").css("display") == "none") {
+								$(this).next("#div2_two").next("#div2_two").css("display", "block");
+								$($(this).children("i")[0]).html("&or;");
+							}
+
+						});
+						div_header_isopen = true;
+					}
+
+				});
+				$("#div3_header a").each(function() {
+					$(this).click(function() {
+						$("#div3_body_index").css("display", "none");
+						$($(this).parent("#div3_header_part")[0]).remove();
+
+					});
+				});
+				$("#div3_header #div3_header_part").each(function() {
+					$(this).click(function() {
+						$("#div3_header #div3_header_part").each(function() {
+							$(this).attr("class", "");
+						});
+						$(this).attr("class", "active");
+						$("#div3_body>div").each(function() {
+							$(this).css("display", "none");
+						});
+						$("#div3_body_index").css("display","block");
+						
+					});
+				});
+				$("#div2 #div2_two").each(function() {
+					$(this).click(function() {
+						var tagName = $($(this).children("a")[0]).text();
+						var isTagExit = true;
+						$("#div3_header #div3_header_part").each(function() {
+							var t = $(this).text();
+							if(tagName == t.match(tagName)) {
+								isTagExit = false;
+							}
+						});
+						if(isTagExit) {
+							var $a = $("<div id='div3_header_part'>" + tagName + "&nbsp;<a>&times;</a></div>");
+
+							$("#div3_header").append($a);
+
+							$("#div3_header a:last-child").click(function() {
+								var tagName1 = $($(this).parent("#div3_header_part")[0]).text();
+								if(tagName1.match("添加用户") == "添加用户") {
+									$("#div3_body_addUserInfo").css("display", "none");
+								}else if(tagName1.match("用户管理") == "用户管理"){
+									$("#div3_body_manageUserInfo").css("display", "none");
+								}else if(tagName1.match("添加规则") == "添加规则"){
+									$("#div3_body_addRule").css("display", "none");
+								}else if(tagName1.match("规则管理") == "规则管理"){
+									$("#div3_body_manageRule").css("display", "none");
+								}else if(tagName1.match("添加项目") == "添加项目"){
+									$("#div3_body_addteamProject").css("display", "none");
+								}else if(tagName1.match("项目管理") == "项目管理"){
+									$("#div3_body_manageteamProject").css("display", "none");
+								}
+								
+								var tagName2 = $(this).parent("#div3_header_part").prev().text()
+								if(tagName2.match("起始页") == "起始页") {
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_index").css("display", "block");
+								} else if(tagName2.match("添加用户") == "添加用户") {
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_addUserInfo").css("display", "block");
+								}else if(tagName2.match("用户管理") == "用户管理"){
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_manageUserInfo").css("display", "block");
+								}else if(tagName2.match("添加规则") == "添加规则"){
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_addRule").css("display", "block");
+								}else if(tagName2.match("规则管理") == "规则管理"){
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_manageRule").css("display", "block");
+								}else if(tagName2.match("添加项目") == "添加项目"){
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_addteamProject").css("display", "block");
+								}else if(tagName2.match("项目管理") == "项目管理"){
+									$(this).parent("#div3_header_part").prev().click();
+									$("#div3_body_manageteamProject").css("display", "block");
+								}
+								$($(this).parent("#div3_header_part")[0]).remove();
+								
+								
+								
+							});
+							$("#div3_header #div3_header_part:last-child").click(function() {
+								$("#div3_header #div3_header_part").each(function() {
+									$(this).attr("class", "");
+								});
+								$(this).attr("class", "active");
+								
+								$("#div3_body>div").each(function() {
+									$(this).css("display", "none");
+								});
+								if(tagName == "添加用户") {
+									$("#div3_body_addUserInfo").css("display", "block");
+								}else if(tagName.match("用户管理") == "用户管理"){
+									$("#div3_body_manageUserInfo").css("display", "block");
+								}else if(tagName.match("添加规则") == "添加规则"){
+									$("#div3_body_addRule").css("display", "block");
+								}else if(tagName.match("规则管理") == "规则管理"){
+									$("#div3_body_manageRule").css("display", "block");
+								}else if(tagName.match("添加项目") == "添加项目"){
+									$("#div3_body_addteamProject").css("display", "block");
+								}else if(tagName.match("项目管理") == "项目管理"){
+									$("#div3_body_manageteamProject").css("display", "block");
+								}
+								
+							});
+
+							$("#div3_header #div3_header_part:last-child").click();
+
+							$("#div3_body>div").each(function() {
+								$(this).css("display", "none");
+							});
+							if(tagName == "添加用户") {
+								$("#div3_body_addUserInfo").css("display", "block");
+							}else if(tagName.match("用户管理") == "用户管理"){
+								$("#div3_body_manageUserInfo").css("display", "block");
+							}else if(tagName.match("添加规则") == "添加规则"){
+								$("#div3_body_addRule").css("display", "block");
+							}else if(tagName.match("规则管理") == "规则管理"){
+								$("#div3_body_manageRule").css("display", "block");
+							}else if(tagName.match("添加项目") == "添加项目"){
+								$("#div3_body_addteamProject").css("display", "block");
+							}else if(tagName.match("项目管理") == "项目管理"){
+								$("#div3_body_manageteamProject").css("display", "block");
+							}
+
+						}else{
+							$("#div3_header>#div3_header_part").each(function(){
+								if($(this).text().match(tagName)==tagName){
+									$(this).click();
+									return false;
+								}
+							});
+							
+							
+							
+						}
+
+					});
+				});
+
+			}); //jquery
+		</script>
+	</body>
+
+</html>

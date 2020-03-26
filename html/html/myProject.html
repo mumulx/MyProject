@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目管理</title>
+		<script src="../js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="header/header.css" />
+		
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			
+			#all {
+				height: 100%;
+				width: 100%;
+				box-sizing: border-box;
+				border: 1px solid red;
+				left: 0;
+				top: 0;
+				overflow: auto;
+				position: absolute;
+				background: #E3E7EA;
+			}
+			
+			#header {
+				width: 100%;
+				height: 65px;
+				top: 0;
+				left: 0;
+				background-color: #293C55;
+				float: left;
+				position: relative;
+			}
+			
+			#logo {
+				width: 300px;
+				height: 65px;
+				text-align: center;
+				float: left;
+				position: relative;
+				margin-left: 100px;
+				margin-top: 20px;
+			}
+			
+			#logo a span {
+				font-family: "华文行楷";
+				font-size: 30px;
+				text-decoration: none;
+				color: #FFFFFF;
+				float: left;
+			}
+			
+			#nav1 {
+				float: left;
+				margin: 0 auto;
+				background-color: #293C55;
+				width: 650px;
+				position: absolute;
+				line-height: 65px;
+				top: 0;
+				left: 400px;
+				box-sizing: border-box;
+			}
+			
+			#nav1 a {
+				padding: 0 30px;
+				float: left;
+				display: inline-block;
+				text-decoration: none;
+				color: #FFFFFF;
+				height: 65px;
+			}
+			
+			#nav1 .active {
+				background: rgba(0, 0, 0, .2);
+			}
+			
+			#login {
+				float: left;
+				margin: 0 auto;
+				background-color: #293C55;
+				width: 90px;
+				position: absolute;
+				line-height: 65px;
+				top: 0;
+				right: 0px;
+				box-sizing: border-box;
+				height: 65px;
+			}
+			
+			#header #login a {
+				padding: 0 2px;
+				float: left;
+				display: inline-block;
+				text-decoration: none;
+				height: 65px;
+			}
+			
+			#header #login a span {
+				margin: 0 auto;
+				font: 12px 微软雅黑;
+				height: 65px;
+				color: #FFFFFF;
+				line-height: 65px;
+			}
+			
+			#login i {
+				margin-top: 26px;
+				color: #fff;
+				float: left;
+				font: 12px 微软雅黑;
+				height: 65px;
+			}
+			
+			#header #login a.active {
+				background: rgba(0, 0, 0, .2);
+			}
+			
+			#options {
+				position: relative;
+				box-sizing: border-box;
+				border-bottom: 1px solid #d4c4b7;
+				background: #E3E7EA;
+				height: 50px;
+				width: 100%;
+				top: 0px;
+				overflow: hidden;
+				-moz-user-select: none;
+				padding-left: 50px;
+				line-height: 50px;
+				margin: 0 auto;
+			}
+			
+			#options span {
+				margin-left: 20px;
+				margin-right: 20px;
+				cursor: pointer;
+				height: 40px;
+				padding: 6px;
+				box-sizing: border-box;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#options span:hover {
+				color: #57c3c2;
+			}
+			
+			#options span.active {
+				border: 1px solid #57c3c2;
+				background: #57c3c2;
+				border-radius: 10px;
+				color: #fff;
+			}
+			
+			#options span.active:hover {
+				color: black;
+			}
+			
+			#myInfo {
+				position: relative;
+				box-sizing: border-box;
+				height: 470px;
+				padding-left: 24px;
+				padding-top: 10px;
+			}
+			
+			#myInfo_header {
+				position: relative;
+				box-sizing: border-box;
+				height: 30px;
+				padding-left: 50px;
+				-moz-user-select: none;
+				line-height: 30px;
+				margin: 0 auto;
+				color: #6c6d6f;
+				display: none;
+			}
+			
+			#myInfo_msg_big {
+				position: relative;
+				box-sizing: border-box;
+				width: 97%;
+				height: 440px;
+				background: #fff;
+				border-radius: 15px;
+				box-shadow: 0 -1px 6px rgba(0, 0, 0, .5);
+				overflow: hidden;
+			}
+			
+			#myInfo_msg {
+				position: relative;
+				box-sizing: border-box;
+				border-bottom: 1px solid #d0dfe6;
+				height: 50px;
+				float: left;
+				width: 100%;
+				padding-left: 100px;
+				overflow: hidden;
+			}
+			
+			#myInfo_msg span {
+				box-sizing: border-box;
+				width: 200px;
+				height: 50px;
+				line-height: 40px;
+				margin: 0 auto;
+				padding: 5px;
+				display: inline-block;
+				text-align: justify;
+			}
+			
+			#myInfo_msg a {
+				margin-left: 100px;
+				color: #0eb0c9;
+				line-height: 50px;
+				display: inline-block;
+			}
+			
+			#myInfo_msg a:hover {
+				color: black;
+				cursor: pointer;
+			}
+			
+			#myTeam_header {
+				position: relative;
+				box-sizing: border-box;
+				height: 30px;
+				padding-left: 50px;
+				-moz-user-select: none;
+				line-height: 30px;
+				margin: 0 auto;
+				color: #6c6d6f;
+			}
+			
+			#myTeam {
+				position: relative;
+				box-sizing: border-box;
+				height: 470px;
+				padding-left: 20px;
+				padding-top: 10px;
+			}
+			
+			#myTeam_msg_big {
+				position: relative;
+				box-sizing: border-box;
+				width: 99%;
+				height: 440px;
+				overflow: hidden;
+				float: left;
+				overflow-y: auto;
+			}
+			
+			#myTeam_msg,
+			#myTeam_msg_add {
+				height: 180px;
+				width: 280px;
+				position: relative;
+				background: #fff;
+				margin-left: 20px;
+				margin-top: 20px;
+				border-radius: 10px;
+				float: left;
+				cursor: pointer;
+				-moz-user-select: none;
+				box-sizing: border-box;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#myTeam_msg:hover {
+				box-shadow: 0 0 20px 2px #ccc;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#myTeam_msg_add {
+				line-height: 160px;
+				text-align: center;
+				font-size: 160px;
+				color: #dcdcdc;
+			}
+			
+			#myTeam_msg_add p {
+				line-height: 0px;
+				font-size: 16px;
+				color: #999;
+				text-align: center;
+			}
+			
+			#myTeam_msg_add:hover {
+				transform: scale(1.05);
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#myTeam_msg span {
+				line-height: 20px;
+				height: 40px;
+				display: inline-block;
+				width: 100%;
+				text-align: center;
+				margin: 0 auto;
+				margin-top: 20px;
+				color: #6c6d6f;
+			}
+			
+			#myTeam_setting {
+				box-sizing: border-box;
+				position: relative;
+				width: 90px;
+				height: 40px;
+				background: #a1abc2;
+				border: 1px solid #ccc;
+				border-radius: 8px;
+				margin: 0 auto;
+				text-align: center;
+				margin-top: 14px;
+				line-height: 40px;
+				color: #fff;
+				float: left;
+				margin-left: 5px;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#myTeam_setting:hover {
+				color: #6c6d6f;
+			}
+			
+			#myInfoAndmyTeam_myInfo {
+				z-index: 999;
+				position: absolute;
+				width: 100%;
+				margin: 0px auto;
+				height: 100%;
+				display: none;
+				top: 0;
+				left: 0;
+				text-align: center;
+				overflow: auto;
+			}
+			
+			#myInfoAndmyTeam_myTeam {
+				z-index: 999;
+				position: absolute;
+				width: 100%;
+				margin: 0px auto;
+				height: 100%;
+				display: none;
+				top: 0;
+				left: 0;
+				text-align: center;
+				overflow: auto;
+			}
+			
+			#myInfo_update {
+				z-index: 1000;
+				top: 100px;
+				height: 220px;
+				width: 600px;
+				background: #fff;
+				border: 1px solid black;
+				box-sizing: border-box;
+				margin: 20px auto;
+				border-radius: 10px;
+				margin-top: 100px;
+			}
+			
+			#myTeam_add {
+				z-index: 1000;
+				top: 100px;
+				height: 270px;
+				width: 600px;
+				background: #fff;
+				border: 1px solid black;
+				box-sizing: border-box;
+				margin: 20px auto;
+				border-radius: 10px;
+				margin-top: 100px;
+			}
+			
+			#myInfo_update_header,
+			#myTeam_add_header {
+				position: relative;
+				top: 0px;
+				left: 0px;
+				width: 599px;
+				height: 50px;
+				border-bottom: 1px solid #e5e5e5;
+				box-sizing: border-box;
+				background: #fff;
+				text-align: left;
+				font-size: 18px;
+				padding-left: 16px;
+				padding-right: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				margin: 0 auto;
+				line-height: 40px;
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				-moz-user-select: none;
+			}
+			
+			#myInfo_update_header span,
+			#myTeam_add_header span {
+				height: 40px;
+				line-height: 40px;
+				margin: 0 auto;
+				width: 200px;
+				display: inline-block;
+			}
+			
+			#myInfo_update_header a,
+			#myTeam_add_header a {
+				font-size: 24px;
+				margin-left: 280px;
+				cursor: pointer;
+				-moz-user-select: none;
+			}
+			
+			#myInfo_update_header a:hover {
+				color: red;
+			}
+			
+			#myTeam_add_header a:hover {
+				color: red;
+			}
+			
+			#myInfo_update_form_pwd,
+			#myTeam_add_form {
+				position: relative;
+				border-bottom: 1px solid #e5e5e5;
+				box-sizing: border-box;
+				height: 150px;
+				overflow: auto;
+			}
+			
+			#myInfo_update_form {
+				position: relative;
+				border-bottom: 1px solid #e5e5e5;
+				box-sizing: border-box;
+				height: 100px;
+				overflow: auto;
+			}
+			
+			#myInfo_update_form_pwd #form_input,
+			#myInfo_update_form #form_input,
+			#myTeam_add_form #form_input {
+				height: 48px;
+				padding: 5px;
+				padding-left: 20px;
+				margin: 0 auto;
+				line-height: 50px;
+				text-align: left;
+			}
+			
+			#form_input {
+				height: 50px;
+				padding: 10px;
+				padding-left: 20px;
+				margin: 0 auto;
+				line-height: 50px;
+				text-align: left;
+			}
+			
+			#form_input span {
+				display: inline-block;
+				width: 120px;
+				font-family: '黑体';
+				font-size: 18px;
+				height: 30px;
+				line-height: 30px;
+				text-align: right;
+			}
+			
+			#form_input input {
+				margin-left: 30px;
+				border: 1px solid #ccc;
+				height: 35px;
+				border-radius: 10px;
+				width: 400px;
+				font-size: 15px;
+				color: #555;
+				padding: 8px;
+				box-sizing: border-box;
+			}
+			
+			#myInfo_update_button,
+			#myTeam_add_button,
+			#user_identity_change_button,
+			#teamuser_add_button {
+				position: relative;
+				width: 599px;
+				height: 50px;
+				box-sizing: border-box;
+				-moz-user-select: none;
+				padding: 5px;
+				padding-right: 50px;
+			}
+			
+			#myInfo_update_button button,
+			#myTeam_add_button button,
+			#user_identity_change_button button,
+			#teamuser_add_button button {
+				transition: all 0.2s ease-in-out;
+				height: 35px;
+				width: 60px;
+				border-radius: 5px;
+				margin-top: 10px;
+				margin-left: 20px;
+				float: right;
+				font-size: 16px;
+				font-family: "新宋体";
+				cursor: pointer;
+			}
+			
+			#myInfo_update_button_submit,
+			#myTeam_add_button_submit,
+			#user_identity_change_button_submit,
+			#teamuser_add_button_submit {
+				background: #1ab394;
+				color: #fff;
+				border: 1px solid #1ab394;
+			}
+			
+			#teamuser_add_button_submit:hover {
+				background: #286090;
+				border: 1px solid #286090;
+			}
+			
+			#myInfo_update_button_submit:hover {
+				background: #286090;
+				border: 1px solid #286090;
+			}
+			
+			#user_identity_change_button_submit:hover {
+				background: #286090;
+				border: 1px solid #286090;
+			}
+			
+			#myTeam_add_button_submit:hover {
+				background: #286090;
+				border: 1px solid #286090;
+			}
+			
+			#myInfo_update_button_close,
+			#div_register_button_close,
+			#myTeam_add_button_close,
+			#user_identity_change_button_close,
+			#teamuser_add_button_close {
+				background: #fff;
+				border: 1px solid #ccc;
+				color: black;
+			}
+			
+			#teamuser_add_button_close:hover {
+				background: #e6e6e6;
+				border: 1px solid #e6e6e6;
+			}
+			
+			#user_identity_change_button_close:hover {
+				background: #e6e6e6;
+				border: 1px solid #e6e6e6;
+			}
+			
+			#myInfo_update_button_close:hover {
+				background: #e6e6e6;
+				border: 1px solid #e6e6e6;
+			}
+			
+			#myTeam_add_button_close:hover {
+				background: #e6e6e6;
+				border: 1px solid #e6e6e6;
+			}
+			
+			#setting_myTeam {
+				position: relative;
+				box-sizing: border-box;
+				padding-left: 20px;
+				padding-right: 20px;
+				padding-top: 20px;
+				display: none;
+				color: #555;
+				-moz-user-select: none;
+			}
+			
+			#setting_myTeam_setting {
+				position: relative;
+				box-sizing: border-box;
+				display: block;
+				background: #fff;
+				border-radius: 20px;
+				box-shadow: 0 0 20px 2px #ccc;
+				margin-bottom: 20px;
+			}
+			
+			#setting_myTeam_setting_header {
+				position: relative;
+				box-sizing: border-box;
+				height: 40px;
+				line-height: 40px;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				border-bottom: 1px solid #d4c4b7;
+				font-size: 20px;
+				padding-left: 40px;
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+			}
+			
+			#setting_myTeam_setting_form {
+				position: relative;
+				box-sizing: border-box;
+				height: 210px;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				border-bottom: 1px solid #d4c4b7;
+				font-size: 16px;
+				padding-left: 40px;
+				padding-top: 10px;
+			}
+			
+			#setting_form_input,
+			#setting_form_date {
+				height: 50px;
+				line-height: 30px;
+				margin: 0 auto;
+				padding: 5px;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			
+			#setting_form_input span,
+			#setting_form_date span {
+				display: inline-block;
+				text-align: right;
+				width: 100px;
+			}
+			
+			#setting_form_input input {
+				box-sizing: border-box;
+				height: 30px;
+				width: 400px;
+				border: 1px solid #ccc;
+				margin-left: 30px;
+				padding-left: 10px;
+				border-radius: 10px;
+				font-size: 16px;
+				color: #555;
+			}
+			
+			#setting_form_date a {
+				height: 30px;
+				width: 400px;
+				margin-left: 30px;
+				padding-left: 5px;
+			}
+			
+			#setting_myTeam_setting_button {
+				position: relative;
+				box-sizing: border-box;
+				height: 70px;
+				line-height: 60px;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				font-size: 16px;
+				padding-left: 220px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				border-bottom-left-radius: 20px;
+				border-bottom-right-radius: 20px;
+				
+			}
+			
+			#setting_myTeam_setting_button span {
+				width: 90px;
+				height: 40px;
+				line-height: 40px;
+				display: inline-block;
+				border: 1px solid #ccc;
+				box-sizing: border-box;
+				margin: 0 auto;
+				text-align: center;
+				margin-left: 80px;
+				border-radius: 10px;
+				cursor: pointer;
+				background: #57c3c2;
+				color: #fff;
+				border: 1px solid #57c3c2;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#setting_myTeam_setting_button span:hover {
+				color: #555;
+			}
+			
+			#setting_myTeam_header {
+				position: relative;
+				box-sizing: border-box;
+				height: 30px;
+				padding-left: 50px;
+				-moz-user-select: none;
+				line-height: 30px;
+				margin: 0 auto;
+				color: #6c6d6f;
+				display: none;
+			}
+			
+			#setting_myTeam_header a:hover {
+				cursor: pointer;
+			}
+			
+			#setting_myTeam_setting_table {
+				position: relative;
+				box-sizing: border-box;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				border-bottom: 1px solid #d4c4b7;
+				font-size: 16px;
+				padding-left: 40px;
+				padding-top: 20px;
+				padding-bottom: 20px;
+				overflow-y: auto;
+			}
+			
+			#setting_myTeam_setting_table table {
+				box-sizing: border-box;
+				width: 100%;
+			}
+			
+			#setting_myTeam_setting_table table thead {
+				height: 50px;
+			}
+			
+			#setting_myTeam_setting_table table thead tr {
+				box-sizing: border-box;
+				background: #f2f2f2;
+			}
+			
+			#setting_myTeam_setting_table table thead th {
+				box-sizing: border-box;
+				width: 230px;
+				text-align: left;
+				padding-left: 10px;
+				cursor: pointer;
+			}
+			
+			#setting_myTeam_setting_table table tbody {}
+			
+			#setting_myTeam_setting_table table tbody tr {
+				height: 40px;
+			}
+			
+			#setting_myTeam_setting_table table tbody tr:hover {
+				background: #f2f2f2;
+				cursor: pointer;
+			}
+			
+			#setting_myTeam_setting_table table tbody td {
+				box-sizing: border-box;
+				width: 230px;
+				text-align: left;
+				padding-left: 10px;
+			}
+			
+			#setting_myTeam_setting_table table tbody td span {
+				width: 70px;
+				display: inline-block;
+				height: 40px;
+				line-height: 40px;
+				margin: 0 auto;
+				text-align: center;
+				
+			}
+			
+			#setting_myTeam_setting_table table tbody td span:hover {
+				border: 1px solid #57c3c2;
+				box-sizing: border-box;
+				background: #57c3c2;
+				border-radius: 15px;
+				color: #fff;
+			}
+			
+			#setting_myTeam_setting_options {
+				position: relative;
+				box-sizing: border-box;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				border-bottom: 1px solid #d4c4b7;
+				font-size: 16px;
+				height: 70px;
+				border-bottom-left-radius: 20px;
+				border-bottom-right-radius: 20px;
+			}
+			
+			#setting_options_choice {
+				position: relative;
+				box-sizing: border-box;
+				height: 60px;
+				margin: 0 auto;
+				display: block;
+				width: 70%;
+				float: left;
+				overflow: hidden;
+			}
+			
+			#setting_options_button {
+				position: relative;
+				box-sizing: border-box;
+				height: 60px;
+				margin: 0 auto;
+				display: block;
+				width: 30%;
+				float: left;
+				padding-top: 10px;
+				padding-left: 130px;
+				overflow: hidden;
+			}
+			
+			#setting_options_button span {
+				width: 110px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				margin: 0 auto;
+				box-sizing: border-box;
+				background: #57c3c2;
+				display: inline-block;
+				margin-left: 17px;
+				border-radius: 10px;
+				cursor: pointer;
+				color: #fff;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#setting_options_button span:hover {
+				color: #555;
+			}
+			
+			#myTeam_info {
+				height: 40px;
+				margin: 0 auto;
+				line-height: 40px;
+				width: 100%;
+				position: relative;
+				padding-left: 50px;
+			}
+			
+			#myTeam_info a {
+				margin-left: 10px;
+				margin-right: 10px;
+				cursor: pointer;
+			}
+			
+			#setting_myTeam_delete {
+				position: relative;
+				box-sizing: border-box;
+				display: block;
+				background: #fff;
+				border-radius: 20px;
+				box-shadow: 0 0 20px 2px #ccc;
+				margin-bottom: 100px;
+				height: 120px;
+			}
+			
+			#setting_myTeam_delete_header {
+				position: relative;
+				box-sizing: border-box;
+				height: 40px;
+				line-height: 40px;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				border-bottom: 1px solid #d4c4b7;
+				font-size: 20px;
+				padding-left: 40px;
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+			}
+			
+			#setting_myTeam_delete_button {
+				position: relative;
+				box-sizing: border-box;
+				height: 60px;
+				line-height: 60px;
+				margin: 0 auto;
+				display: block;
+				background: #fff;
+				font-size: 16px;
+				overflow: hidden;
+			}
+			
+			#setting_myTeam_delete_button span {
+				width: 110px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				margin: 0 auto;
+				margin-left: auto;
+				box-sizing: border-box;
+				background: #57c3c2;
+				display: inline-block;
+				margin-left: 82%;
+				border-radius: 10px;
+				cursor: pointer;
+				color: #fff;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#setting_myTeam_delete_button span:hover {
+				color: #555;
+			}
+			
+			#user_identity_change_big,
+			#teamuser_add_big {
+				z-index: 999;
+				position: absolute;
+				width: 100%;
+				margin: 0px auto;
+				height: 100%;
+				display: none;
+				top: 0;
+				left: 0;
+				text-align: center;
+				overflow: auto;
+			}
+			
+			#user_identity_change,
+			#teamuser_add {
+				z-index: 1000;
+				top: 100px;
+				height: 200px;
+				width: 600px;
+				background: #fff;
+				border: 1px solid black;
+				box-sizing: border-box;
+				margin: 20px auto;
+				border-radius: 10px;
+				margin-top: 100px;
+			}
+			
+			#user_identity_change_header,
+			#teamuser_add_header {
+				position: relative;
+				top: 0px;
+				left: 0px;
+				width: 599px;
+				height: 50px;
+				border-bottom: 1px solid #e5e5e5;
+				box-sizing: border-box;
+				background: #fff;
+				text-align: left;
+				font-size: 18px;
+				padding-left: 16px;
+				padding-right: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				margin: 0 auto;
+				line-height: 40px;
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				-moz-user-select: none;
+			}
+			
+			#user_identity_change_body {
+				position: relative;
+				top: 0px;
+				left: 0px;
+				width: 599px;
+				height: 80px;
+				border-bottom: 1px solid #e5e5e5;
+				box-sizing: border-box;
+				background: #fff;
+				text-align: left;
+				-moz-user-select: none;
+				padding-top: 15px;
+			}
+			
+			#teamuser_add_body {
+				position: relative;
+				top: 0px;
+				left: 0px;
+				width: 599px;
+				height: 110px;
+				border-bottom: 1px solid #e5e5e5;
+				box-sizing: border-box;
+				background: #fff;
+				text-align: left;
+				-moz-user-select: none;
+			}
+			
+			#teamuser_add_body span {
+				height: 50px;
+				line-height: 50px;
+				margin: 0 auto;
+				display: inline-block;
+				margin-left: 50px;
+			}
+			
+			#user_identity_change_body span {
+				height: 50px;
+				width: 120px;
+				line-height: 50px;
+				margin: 0 auto;
+				display: inline-block;
+				margin-left: 50px;
+			}
+			
+			#user_identity_change_body a {
+				height: 40px;
+				width: 90px;
+				line-height: 40px;
+				margin: 0 auto;
+				display: inline-block;
+				margin-left: 10px;
+				text-align: center;
+				box-sizing: border-box;
+				border: 1px solid #ccc;
+				border-radius: 15px;
+				cursor: pointer;
+				background: #fff;
+				color: black;
+			}
+			
+			#user_identity_change_body a.active {
+				background: #1ab394;
+				color: #fff;
+				border-color: #1ab394;
+			}
+			
+			#user_identity_change_body a.active:hover {
+				background: #286090;
+				border-color: #286090;
+			}
+			
+			#user_identity_change_body a:hover {
+				background: #e6e6e6;
+				border-color: #e6e6e6;
+			}
+			
+			#user_identity_change_button {
+				position: relative;
+				width: 599px;
+				height: 60px;
+				box-sizing: border-box;
+				background: #fff;
+				text-align: left;
+				-moz-user-select: none;
+			}
+			
+			#teamuser_add_body_input {
+				position: relative;
+				height: 40px;
+				line-height: 38px;
+				margin: 0 auto;
+				box-sizing: border-box;
+				padding-left: 50px;
+			}
+			
+			#teamuser_add_body_input input {
+				margin-left: 10px;
+				border: 1px solid #ccc;
+				height: 35px;
+				border-radius: 10px;
+				width: 450px;
+				font-size: 15px;
+				color: #555;
+				padding: 8px;
+				box-sizing: border-box;
+			}
+			#myTeam_content{
+				position: relative;
+				box-sizing: border-box;
+				padding-left: 20px;
+				padding-top: 10px;
+				background: #CCE6FF;
+				display: none;
+				border:1px solid #0000FF ;
+			}
+			#myTeam_content_button{
+				position: relative;
+				height: 41px;
+				box-sizing: border-box;
+				color: #555;
+				-moz-user-select: none;
+				background: #f4f4f4;
+				border-bottom: 1px solid #ccc;
+				overflow: hidden;
+			}
+			#button_total,#button_page{
+				position: relative;
+				height: 40px;
+				float: left;
+				width: 130px;
+				line-height: 40px;
+				text-align: center;
+				margin: 0 auto;
+				background: #f4f4f4;
+				border-right: 1px solid #ccc;
+				-moz-box-sizing: border-box;
+				overflow: hidden;
+			}
+		
+			#button_paging{
+				position: relative;
+				height: 40px;
+				float: left;
+				width: 300px;
+				line-height: 40px;
+				margin: 0 auto;
+				background: #f4f4f4;
+				border-right: 1px solid #ccc;
+				-moz-box-sizing: border-box;
+				text-align: center;
+				padding-left: 10px;
+				overflow: hidden;
+			}
+			#button_paging div{
+				position: relative;
+				height: 40px;
+				float: left;
+				width: 50px;
+				line-height: 40px;
+				text-align: center;
+				margin: 0 auto;
+				background: #f4f4f4;
+				border-right: 1px solid #ccc;
+				-moz-box-sizing: border-box;
+				cursor: pointer;
+			}
+			#button_paging_index:hover,#button_paging_prev:hover,#button_paging_next:hover,#button_paging_last:hover{
+				background:#02a8f5 ;
+				color: #fff;
+				transition: all 0.1s ease-in-out;
+			}
+			
+			#button_choice_all,#button_choice_my,#button_choice_other{
+				position: relative;
+				height: 40px;
+				float: left;
+				width: 140px;
+				line-height: 40px;
+				text-align: center;
+				margin: 0 auto;
+				background: #f4f4f4;
+				border-right: 1px solid #ccc;
+				-moz-box-sizing: border-box;
+				overflow: hidden;
+			}
+				#button_jump{
+				position: relative;
+				height: 40px;
+				float: left;
+				width: 400px;
+				line-height: 40px;
+				text-align: center;
+				margin: 0 auto;
+				background: #f4f4f4;
+				-moz-box-sizing: border-box;
+				border-right: 1px solid #ccc;
+			}
+			#button_jump input {
+				width: 40px;
+				height: 20px;
+				box-sizing: border-box;
+				border: 1px solid #02a8f5;
+				border-radius: 5px;
+				margin-left: 5px;
+				margin-right: 5px;
+				font-size: 13px;
+				color: #555;
+				padding: 2px;
+				text-align: center;
+			}
+			
+			#button_jump button {
+				width: 50px;
+				height: 23px;
+				box-sizing: border-box;
+				border: 1px solid #02a8f5;
+				border-radius: 10px;
+				margin-left: 20px;
+				font-size: 13px;
+				color: #555;
+				padding: 2px;
+				text-align: center;
+				cursor: pointer;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#button_jump button:hover {
+				background: #02a8f5;
+				color: #fff;
+			}
+			#button_total:hover,#button_choice_all:hover,#button_choice_my:hover,#button_choice_other:hover{
+				color: #02a8f5;
+				border-bottom: 2px solid #02a8f5;
+				cursor: pointer;
+			}
+			#button_choice_all span.active,#button_choice_my span.active,#button_choice_other span.active{
+				padding: 4px;
+				border: 2px solid #02a8f5;
+				border-radius: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+				color: #02a8f5;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#record {
+				margin-top: 20px;
+				position: relative;
+				box-sizing: border-box;
+				top: 0px;
+				display: block;
+				color: #555;
+				margin-bottom: 100px;
+				border: 1px solid #ccc;
+				border-top: 0px;
+				margin-left: 30px;
+				margin-right: 30px;
+				background: #fff;
+				border-radius: 20px;
+				overflow-x: hidden;
+				border-bottom: 0px;
+				box-shadow: 0 0 20px 2px #ccc;
+			}
+			
+			#record_header:hover {
+				background: #f2f2f2;
+				cursor: pointer;
+			}
+			
+			#record_header {
+				height: 81px;
+				line-height: 80px;
+				margin: 0 auto;
+				position: relative;
+				box-sizing: border-box;
+				width: 100%;
+				border-bottom: 1px solid #ccc;
+				padding-left: 100px;
+				font-size: 13px;
+				overflow: hidden;
+			}
+			
+			#record_header_id {
+				width: 160px;
+				float: left;
+				overflow: hidden;
+			}
+			
+			#record_header_pro {
+				width: 350px;
+				float: left;
+				overflow: hidden;
+			}
+			
+			#record_header_date {
+				width: 160px;
+				float: left;
+				overflow: hidden;
+			}
+			
+			#record_header_filenum {
+				width: 160px;
+				float: left;
+				overflow: hidden;
+			}
+			
+			#record_header_rulenum {
+				width: 160px;
+				float: left;
+				overflow: hidden;
+			}
+			
+			#record_header_button {
+				width: 80px;
+				float: left;
+				height: 80px;
+				line-height: 80px;
+				margin: 0 auto;
+				padding: 20px;
+				box-sizing: border-box;
+				-moz-user-select: none;
+				cursor: pointer;
+				overflow: hidden;
+			}
+			
+			#record_header_button_button {
+				position: relative;
+				line-height: 40px;
+				text-align: center;
+				vertical-align: middle;
+				border-radius: 50%;
+				height: 40px;
+				width: 40px;
+				content: '+';
+				font-weight: 200;
+				-webkit-box-shadow: 0 0 0 2px #cccccc inset;
+				box-shadow: 0 0 0 2px #cccccc inset;
+				font-size: 2em;
+				color: #ccc;
+				-webkit-transition: all 0.2s ease-in-out;
+				-o-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}
+			
+			#record_header_button_button:hover {
+				color: #02a8f5;
+				-webkit-box-shadow: 0 0 0 2px #02a8f5 inset;
+			}
+			
+			#record_body {
+				height: 240px;
+				position: relative;
+				box-sizing: border-box;
+				width: 100%;
+				border-bottom: 1px solid #ccc;
+				background: #f4f4f4;
+				padding-left: 80px;
+				overflow: hidden;
+			}
+			
+			#record_body_filename {
+				height: 70px;
+				line-height: 70px;
+				margin: 0 auto;
+				position: relative;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			
+			#record_body_filename a,
+			#record_body_rulename a {
+				margin-right: 20px;
+				float: left;
+				height: 69px;
+			}
+			
+			#record_body_rulename {
+				height: 70px;
+				line-height: 70px;
+				margin: 0 auto;
+				position: relative;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			
+			#record_body_button {
+				height: 100px;
+				line-height: 100px;
+				margin: 0 auto;
+				position: relative;
+				box-sizing: border-box;
+				padding-left: 500px;
+				overflow: hidden;
+			}
+			
+			#record_body_button span {
+				display: inline-block;
+				height: 40px;
+				width: 150px;
+				line-height: 40px;
+				margin-right: 60px;
+				border: 1px solid #02a8f5;
+				text-align: center;
+				border-radius: 10px;
+				background: #02a8f5;
+				-moz-user-select: none;
+				cursor: pointer;
+				color: #fff;
+				transition: all 0.2s ease-in-out;
+				box-shadow: 0 3px 8px 0 rgba(2, 168, 245, 0.5);
+			}
+			
+			#record_body_button span:hover {
+				box-shadow: 0 1px 5px 0 rgba(2, 168, 245, 0.25);
+				background-color: #0290d2;
+				border-color: #0290d2;
+			}
+			#caption_header {
+				position: relative;
+				box-sizing: border-box;
+				border-bottom: 1px solid #ccc;
+				border-top: 1px solid #ccc;
+				height: 50px;
+				line-height: 50px;
+				margin: 0 auto;
+				width: 100%;
+				padding-left: 100px;
+				-moz-user-select: none;
+				cursor: pointer;
+				background: #f2f2f2;
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="all" style="overflow: auto;">
+			<div id="header">
+				<div id="logo">
+					<a href=""><span>三维模型质量检查</span></a href="#">
+				</div>
+				<div id="nav1">
+					<a href="index.html">首页</a>
+					<a class="active" href="#">项目管理</a>
+					<a href="submit_document.html">提交文件</a>
+					<a href="record_submit.html">提交记录</a>
+					<a href="#">关于帮助</a>
+				</div>
+				<div id="login">
+					<a href="#" id="login_login"><span>登录</span></a>
+					<a href="#" id="login_welcome" style="display: none;"><span>欢迎</span></a>
+					<i>｜</i>
+					<a href="#" id="login_register"><span>注册</span></a>
+					<a href="#" id="login_exit" style="display: none;"><span>退出</span></a>
+				</div>
+			</div>
+			<div id="options">
+				<span class="active"><a>我的项目</a></span>
+				<span><a>我的主页</a></span>
+			</div>
+			<div id="myInfo_header">
+				<span>我的主页 /</span>
+				<span>个人信息详情</span>
+			</div>
+			<div id="myInfo" style="display: none;">
+				<div id="myInfo_msg_big">
+					<div id="myInfo_msg">
+						<span>账号</span>
+						<span>1111111111</span>
+					</div>
+					<div id="myInfo_msg">
+						<span>密码</span>
+						<span>1111111111</span>
+						<a>点击修改</a>
+					</div>
+					<div id="myInfo_msg">
+						<span>昵称</span>
+						<span>1111111111</span>
+						<a>点击修改</a>
+					</div>
+					<div id="myInfo_msg">
+						<span>性别</span>
+						<span>男</span>
+						<a>点击修改</a>
+					</div>
+					<div id="myInfo_msg">
+						<span>年龄</span>
+						<span>23</span>
+						<a>点击修改</a>
+					</div>
+					<div id="myInfo_msg">
+						<span>家庭住址</span>
+						<span>江苏省盐城市</span>
+						<a>点击修改</a>
+					</div>
+					<div id="myInfo_msg">
+						<span>联系电话</span>
+						<span>14714714714</span>
+						<a>点击修改</a>
+					</div>
+					<div id="myInfo_msg">
+						<span>电子邮箱</span>
+						<span>14714714714@qq.com</span>
+						<a>点击修改</a>
+					</div>
+				</div>
+			</div>
+			<div id="myTeam_header">
+				<span>我的项目/</span>
+				<span>项目列表</span>
+			</div>
+			<div id="myTeam" style="display: block;">
+				<div id="myTeam_msg_big">
+					<div id="myTeam_msg">
+						<span>减速器</span><br />
+						<span>2019-1-1</span>
+						<div id="myTeam_setting" style="width: 170px;">
+							项目内容
+						</div>
+						<div id="myTeam_setting">
+							设置
+						</div>
+
+					</div>
+					<div id="myTeam_msg_add">
+						+
+						<p>创建项目</p>
+					</div>
+				</div>
+			</div>
+			<div id="cover" style="display: none;background: #000; position: absolute;height: 100%; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; z-index: 998 "></div>
+			<div id="myInfoAndmyTeam_myInfo">
+				<div id="myInfo_update">
+					<div id="myInfo_update_header">
+						&equiv;&nbsp;&nbsp;&nbsp;修改<span>密码</span>
+						<a>&times;</a>
+					</div>
+					<div id="myInfo_update_form_pwd" style="display: none;">
+						<form action="" method="post">
+							<div id="form_input">
+								<span>输入密码:</span><input type="text" name="username" placeholder="请输入密码 " />
+							</div>
+							<div id="form_input">
+								<span>确认密码:</span><input type="password" name="userpwd" placeholder="请再次输入密码" />
+							</div>
+							<input style="display: none;" type="submit" value="登录" />
+						</form>
+					</div>
+					<div id="myInfo_update_form">
+						<form action="" method="post">
+							<div id="form_input">
+								<span>输入密码:</span><input type="text" name="username" placeholder="请输入用户名" />
+							</div>
+							<input style="display: none;" type="submit" value="登录" />
+						</form>
+					</div>
+					<div id="myInfo_update_button">
+						<button id="myInfo_update_button_submit"><b>修改</b></button>
+						<button id="myInfo_update_button_close"><b>关闭</b></button>
+					</div>
+				</div>
+
+			</div>
+			<div id="myInfoAndmyTeam_myTeam">
+				<div id="myTeam_add">
+					<div id="myTeam_add_header">
+						&equiv;&nbsp;&nbsp;&nbsp;创建<span>项目</span>
+						<a>&times;</a>
+					</div>
+					<div id="myTeam_add_form">
+						<form action="" method="post">
+							<div id="form_input">
+								<span>输入项目名:</span><input type="text" name="username" placeholder="请输入项目名 " />
+							</div>
+							<div id="form_input">
+								<span>项目描述:</span><input type="password" name="userpwd" placeholder="请输入项目描述" />
+							</div>
+							<input style="display: none;" type="submit" value="登录" />
+						</form>
+					</div>
+					<div id="myTeam_add_button">
+						<button id="myTeam_add_button_submit"><b>创建</b></button>
+						<button id="myTeam_add_button_close"><b>关闭</b></button>
+					</div>
+				</div>
+
+			</div>
+			<div id="setting_myTeam_header">
+				<a>项目列表/</a>
+				<span>减速器/</span>
+				<span>项目设置</span>
+			</div>
+			<div id="setting_myTeam" style="display: none;">
+				<div id="setting_myTeam_setting">
+					<div id="setting_myTeam_setting_header">
+						&equiv;&nbsp;&nbsp;项目信息
+					</div>
+					<div id="setting_myTeam_setting_form">
+						<div id="setting_form_input">
+							<span>项目名:</span><input type="text" value="减速器" placeholder="请输入项目名 " />
+						</div>
+						<div id="setting_form_input">
+							<span>项目描述:</span><input type="text" value="33321212" placeholder="请输入项目描述 " />
+						</div>
+						<div id="setting_form_input">
+							<span>我的昵称:</span><input type="text" value="木木" placeholder="请输入在本项目的昵称 " />
+						</div>
+						<div id="setting_form_date">
+							<span>项目创建时间:</span>
+							<a>2019-2-1</a>
+						</div>
+					</div>
+					<div id="setting_myTeam_setting_button">
+						<span id="myTeam_setting_update">修改 </span>
+						<span id="myTeam_setting_close">取消</span>
+					</div>
+				</div>
+				<div id="setting_myTeam_setting">
+					<div id="setting_myTeam_setting_header">
+						&equiv;&nbsp;&nbsp;项目成员
+					</div>
+					<div id="setting_myTeam_setting_table">
+						<table cellpadding="0" cellspacing="0">
+							<thead>
+								<th>账号</th>
+								<th>昵称</th>
+								<th>邮箱</th>
+								<th>身份</th>
+								<th>操作</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>14752109608</td>
+									<td>木木</td>
+									<td>2606964863@qq.com</td>
+									<td>管理员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+								<tr>
+									<td>111</td>
+									<td>木木</td>
+									<td>11111@qq.com</td>
+									<td>成员</td>
+									<td><span>删除</span><span>授权</span></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+					<div id="setting_myTeam_setting_options">
+						<div id="setting_options_choice">
+
+							<div id="myTeam_info">
+								<span>本项目共</span>
+								<a>8</a><span>个成员</span>
+								<a>1</a><span>个管理员</span>
+								<a>7</a><span>个成员</span>
+							</div>
+
+						</div>
+						<div id="setting_options_button">
+							<span>
+								添加成员
+							</span>
+						</div>
+					</div>
+				</div>
+				<div id="setting_myTeam_delete">
+					<div id="setting_myTeam_delete_header">
+						&equiv;&nbsp;&nbsp;删除项目
+					</div>
+					<div id="setting_myTeam_delete_button">
+						<span>删除项目</span>
+					</div>
+				</div>
+			</div>
+			<div id="user_identity_change_big">
+				<div id="user_identity_change">
+					<div id="user_identity_change_header">
+						&equiv;&nbsp;&nbsp;身份变更
+					</div>
+					<div id="user_identity_change_body">
+						<span>项目成员身份：</span>
+						<a class="active">管理员</a>
+						<a>成员</a>
+					</div>
+
+					<div id="user_identity_change_button">
+						<button id="user_identity_change_button_submit"><b>确定</b></button>
+						<button id="user_identity_change_button_close"><b>取消</b></button>
+					</div>
+
+				</div>
+			</div>
+			<div id="teamuser_add_big" style="display: none;">
+				<div id="teamuser_add" style="height: 230px;">
+					<div id="teamuser_add_header">
+						&equiv;&nbsp;&nbsp;添加成员
+					</div>
+					<div id="teamuser_add_body">
+						<span>请输入对方的账号</span>
+
+						<div id="teamuser_add_body_input">
+							<input type="text" placeholder="请输入用户名" />
+						</div>
+					</div>
+					<div id="teamuser_add_button">
+						<button id="teamuser_add_button_submit"><b>添加</b></button>
+						<button id="teamuser_add_button_close"><b>取消</b></button>
+					</div>
+
+				</div>
+			</div>
+			<div id="myTeam_content" style="display: none; padding: 0px;">
+				<div id="myTeam_content_button">
+					<div id="button_jump">
+						<span>跳转至第</span>
+						<input type="text" />
+						<span>页</span>
+						<button>确认</button>
+					</div>
+					<div id="button_total">
+						<span>共</span>
+						<a>5</a>
+						<span>条记录</span>
+					</div>
+					<div id="button_paging">
+						<div id="button_paging_index" style="border-left: 1px solid #ccc">
+							«
+						</div>
+						<div id="button_paging_prev">
+							‹
+						</div>
+						<div id="button_paging_page" style="width: 80px;">
+							<span>1</span>/
+							<a>12</a>
+						</div>
+						<div id="button_paging_next">
+							›
+						</div>
+						<div id="button_paging_last">
+							»
+						</div>
+						 
+					</div>
+					<div id="button_choice_all" >
+						<span class="active">全部记录</span>
+					</div>
+					<div id="button_choice_my">
+						<span>我的记录</span>
+					</div>
+					<div id="button_choice_other" style="border-right: 0px;">
+						<span>其他记录</span>
+					</div>
+				</div>
+				<div id="record">
+				<div id="caption_header">
+					<div id="record_header_id">
+						序号
+					</div>
+					<div id="record_header_date">
+						昵称
+					</div>
+					<div id="record_header_filenum">
+						提交时间
+					</div>
+					<div id="record_header_rulenum">
+						文件数
+					</div>
+					<div id="record_header_pro">
+						规则数
+					</div>
+				</div>
+				<div id="record_header">
+
+					<div id="record_header_id">
+						1
+					</div>
+
+					<div id="record_header_date">
+						木木
+					</div>
+					<div id="record_header_filenum">
+						2019-1-1
+					</div>
+					<div id="record_header_rulenum">
+						2
+					</div>
+					<div id="record_header_pro">
+						2
+					</div>
+					<div id="record_header_button">
+						<div id="record_header_button_button">
+							+
+						</div>
+					</div>
+
+				</div>
+				<div id="record_body" style="display: none;">
+					<div id="record_body_filename">
+						<a>文件名:</a>
+						<span>model1.prt、model2.prt、dianpian1.prt、dianpian2.prt</span>
+					</div>
+					<div id="record_body_rulename">
+						<a>规则名:</a>
+						<span>特征数、111111、ssssssss、wwwwwwww</span>
+					</div>
+					<div id="record_body_button">
+						<span>查看查询结果</span>
+						<span>删除该条记录</span>
+					</div>
+
+				</div>
+				<div id="record_header">
+
+					<div id="record_header_id">
+						2
+					</div>
+
+					<div id="record_header_date">
+						哈哈
+					</div>
+					<div id="record_header_filenum">
+						2019-1-1
+					</div>
+					<div id="record_header_rulenum">
+						3
+					</div>
+					<div id="record_header_pro">
+						1
+					</div>
+					<div id="record_header_button">
+						<div id="record_header_button_button">
+							+
+						</div>
+					</div>
+				</div>
+				<div id="record_body" style="display: none;">
+					<div id="record_body_filename">
+						<a>文件名:</a>
+						<span>model1.prt、model2.prt、dianpian1.prt、dianpian2.prt</span>
+					</div>
+					<div id="record_body_rulename">
+						<a>规则名:</a>
+						<span>特征数、111111、ssssssss、wwwwwwww</span>
+					</div>
+					<div id="record_body_button">
+						<span>查看查询结果</span>
+						<span>删除该条记录</span>
+					</div>
+
+				</div>
+				<div id="record_header">
+
+					<div id="record_header_id">
+						3
+					</div>
+
+					<div id="record_header_date">
+						嘻嘻
+					</div>
+					<div id="record_header_filenum">
+						2019-1-1
+					</div>
+					<div id="record_header_rulenum">
+						3
+					</div>
+					<div id="record_header_pro">
+						3
+					</div>
+					<div id="record_header_button">
+						<div id="record_header_button_button">
+							+
+						</div>
+					</div>
+				</div>
+				<div id="record_body" style="display: none;">
+					<div id="record_body_filename">
+						<a>文件名:</a>
+						<span>model1.prt、model2.prt、dianpian1.prt、dianpian2.prt</span>
+					</div>
+					<div id="record_body_rulename">
+						<a>规则名:</a>
+						<span>特征数、111111、ssssssss、wwwwwwww</span>
+					</div>
+					<div id="record_body_button">
+						<span>查看查询结果</span>
+						<span>删除该条记录</span>
+					</div>
+
+				</div>
+				<div id="record_header">
+
+					<div id="record_header_id">
+						4
+					</div>
+
+					<div id="record_header_date">
+						丫丫
+					</div>
+					<div id="record_header_filenum">
+						2019-1-1
+					</div>
+					<div id="record_header_rulenum">
+						3
+					</div>
+					<div id="record_header_pro">
+						5
+					</div>
+					<div id="record_header_button">
+						<div id="record_header_button_button">
+							+
+						</div>
+					</div>
+				</div>
+				<div id="record_body" style="display: none;">
+					<div id="record_body_filename">
+						<a>文件名:</a>
+						<span>model1.prt、model2.prt、dianpian1.prt、dianpian2.prt</span>
+					</div>
+					<div id="record_body_rulename">
+						<a>规则名:</a>
+						<span>特征数、111111、ssssssss、wwwwwwww</span>
+					</div>
+					<div id="record_body_button">
+						<span>查看查询结果</span>
+						<span>删除该条记录</span>
+					</div>
+
+				</div>
+				<div id="record_header">
+
+					<div id="record_header_id">
+						5
+					</div>
+
+					<div id="record_header_date">
+						张三
+					</div>
+					<div id="record_header_filenum">
+						2019-1-1
+					</div>
+					<div id="record_header_rulenum">
+						3
+					</div>
+					<div id="record_header_pro">
+						2
+					</div>
+					<div id="record_header_button">
+						<div id="record_header_button_button">
+							+
+						</div>
+					</div>
+				</div>
+				<div id="record_body" style="display: none;">
+					<div id="record_body_filename">
+						<a>文件名:</a>
+						<span>model1.prt、model2.prt、dianpian1.prt、dianpian2.prt</span>
+					</div>
+					<div id="record_body_rulename">
+						<a>规则名:</a>
+						<span>特征数、111111、ssssssss、wwwwwwww</span>
+					</div>
+					<div id="record_body_button">
+						<span>查看查询结果</span>
+						<span>删除该条记录</span>
+					</div>
+
+				</div>
+			</div>
+				
+			</div>
+			
+			
+			
+		</div>
+		<script src="header/header.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#options>span").each(function() {
+					$(this).click(function() {
+						$("#options>span").each(function() {
+							$(this).attr("class", "");
+						});
+						$(this).attr("class", "active");
+					});
+				});
+				$("#options span:first").click(function() {
+					$("#myTeam").css("display", "block");
+					$("#myInfo").css("display", "none");
+					$("#myInfo_header").hide();
+					$("#myTeam_header").show();
+					$("#setting_myTeam").css("display", "none");
+					$("#setting_myTeam_header").css("display", "none");
+					$("#myTeam_content").hide();
+				});
+				$("#options span:last-child").click(function() {
+					$("#myTeam_content").hide();
+					$("#myTeam").css("display", "none");
+					$("#myInfo").css("display", "block");
+					$("#myInfo_header").show();
+					$("#myTeam_header").hide();
+					$("#setting_myTeam").css("display", "none");
+					$("#setting_myTeam_header").css("display", "none");
+				});
+				$("#myInfo_msg_big a").each(function() {
+					$(this).click(function() {
+						var msg = $(this).prev("span").prev("span").text();
+						if(msg == "密码") {
+							//$("#all").scrollTop(0);
+							$("#cover").css("top", $("#all").scrollTop());
+							$("#myInfoAndmyTeam_myInfo").css("top", $("#all").scrollTop());
+							$("#myInfo_update_form_pwd input").each(function() {
+								$(this).attr("value", "");
+							});
+							$("#myInfo_update").css("height", "270");
+							$("#myInfo_update_form_pwd").css("display", "block");
+							$("#myInfo_update_form").css("display", "none");
+							$("#all").css("overflow", "hidden");
+							$("#cover").show();
+							$("#myInfoAndmyTeam_myInfo").show();
+
+						} else {
+							//$("#all").scrollTop(0);
+							$("#cover").css("top", $("#all").scrollTop());
+							$("#myInfoAndmyTeam_myInfo").css("top", $("#all").scrollTop());
+							$("#myInfo_update_form input:first").attr("value", "");
+							$("#myInfo_update_form input:first").attr("placeholder", "请输入" + msg);
+							$("#myInfo_update").css("height", "220");
+							$("#myInfo_update_form_pwd").css("display", "none");
+							$("#myInfo_update_form").css("display", "block");
+							$($("#myInfo_update_form span")[0]).text("输入" + msg + ":");
+							$("#all").css("overflow", "hidden");
+							$("#cover").show();
+							$("#myInfoAndmyTeam_myInfo").show();
+							$($("#myInfo_update_header span")[0]).text(msg);
+						}
+					});
+				});
+				$("#myInfo_update_button_close").click(function() {
+					$("#cover").css("top", "0");
+					$("#myInfoAndmyTeam_myInfo").css("top", "0");
+					$("#cover").hide();
+					$("#myInfoAndmyTeam_myInfo").hide();
+					$("#all").css("overflow", "auto");
+				});
+				$($("#myInfo_update_header a")[0]).click(function() {
+					return $("#myInfo_update_button_close").click();
+				});
+				$("#myTeam_msg_add").click(function() {
+					//$("#all").scrollTop(0);
+					$("#cover").css("top", $("#all").scrollTop());
+					$("#myInfoAndmyTeam_myTeam").css("top", $("#all").scrollTop());
+					$("#cover").show();
+					$("#all").css("overflow", "hidden");
+					$("#myInfoAndmyTeam_myTeam").show();
+				});
+				$("#myTeam_add_button_close").click(function() {
+					$("#cover").css("top", "0");
+					$("#myInfoAndmyTeam_myTeam").css("top", "0");
+					$("#cover").hide();
+					$("#myInfoAndmyTeam_myTeam").hide();
+					$("#all").css("overflow", "auto");
+				});
+				$("#myTeam_add_button_submit").click(function() {
+					$("#myTeam_add_button_close").click();
+					
+				});
+				$($("#myTeam_add_header a")[0]).click(function() {
+					return $("#myTeam_add_button_close").click();
+				});
+				$("#myTeam_msg_big #myTeam_msg").each(function() {
+					
+					$(this).children("#myTeam_setting").last().click(function(e) {
+						//alert(2);
+						$("#setting_myTeam_header span:last-child").text("项目设置");
+						$("#myTeam").css("display", "none");
+						$("#setting_myTeam").css("display", "block");
+						$("#setting_myTeam_header").css("display", "block");
+						$("#myTeam_header").hide();
+						$("#myInfo_header").hide();
+						e.stopPropagation();//阻止冒泡
+					});
+					$(this).children("#myTeam_setting").first().click(function(e) {
+						//alert(22);
+						$("#setting_myTeam_header span:last-child").text("项目内容");
+						$("#myTeam").css("display", "none");
+						$("#myTeam_content").css("display", "block");
+						$("#setting_myTeam_header").css("display", "block");
+						$("#myTeam_header").hide();
+						$("#myInfo_header").hide();
+						e.stopPropagation();
+					});
+					$(this).click(function(){
+						$(this).children("#myTeam_setting").first().click();
+						
+					});
+
+				});
+
+				$("#setting_myTeam_header a:first").click(function() {
+					return $("#options span:first").click();
+
+				});
+				$("#setting_myTeam_setting_table table tr").each(function() {
+					$(this).children("td").last().children("span").first().click(function() {
+						if(confirm("是否删除")) {
+							console.log("删除");
+						} else {
+							console.log("取消");
+						}
+					});
+					$(this).children("td").last().children("span").last().click(function() {
+
+						$("#cover").css("top", $("#all").scrollTop());
+						$("#user_identity_change_big").css("top", $("#all").scrollTop());
+						$("#cover").show();
+						$("#all").css("overflow", "hidden");
+						$("#user_identity_change_big").show();
+
+					});
+				});
+				$("#user_identity_change_button_submit").click(function() {
+					$("#user_identity_change_button_close").click();
+				});
+				$("#user_identity_change_button_close").click(function() {
+					$("#cover").css("top", "0");
+					$("#user_identity_change_big").css("top", "0");
+					$("#cover").hide();
+					$("#all").css("overflow", "auto");
+					$("#user_identity_change_big").hide();
+				});
+				$("#myTeam_setting_close").click(function() {
+
+					return $("#options span:first").click();
+
+				});
+				$("#setting_myTeam_delete_button>span:first").click(function() {
+					if(confirm("是否删除")) {
+						console.log("删除项目");
+					} else {
+						console.log("取消删除项目");
+					}
+				});
+
+				$("#user_identity_change_body a").each(function() {
+
+					$(this).click(function() {
+						$("#user_identity_change_body a").each(function() {
+							$(this).attr("class", "");
+						});
+						$(this).attr("class", "active");
+					});
+				});
+				$("#setting_options_button").click(function() {
+					$("#cover").css("top", $("#all").scrollTop());
+					$("#teamuser_add_big").css("top", $("#all").scrollTop());
+					$("#cover").show();
+					$("#all").css("overflow", "hidden");
+					$("#teamuser_add_big").show();
+				});
+				$("#teamuser_add_button_close").click(function() {
+					$("#cover").css("top", "0");
+					$("#teamuser_add_big").css("top", "0");
+					$("#cover").hide();
+					$("#all").css("overflow", "auto");
+					$("#teamuser_add_big").hide();
+				});
+				$("#teamuser_add_button_submit").click(function() {
+					$("#teamuser_add_button_close").click();
+				});
+				$("#button_choice_all").click(function(){
+					$("#button_choice_my").children("span").first().attr("class","");
+					$("#button_choice_other").children("span").first().attr("class","");
+					$(this).children("span").first().attr("class","active");
+				});
+				$("#button_choice_my").click(function(){
+					$("#button_choice_all").children("span").first().attr("class","");
+					$("#button_choice_other").children("span").first().attr("class","");
+					$(this).children("span").first().attr("class","active");
+				});
+				$("#button_choice_other").click(function(){
+					$("#button_choice_my").children("span").first().attr("class","");
+					$("#button_choice_all").children("span").first().attr("class","");
+					$(this).children("span").first().attr("class","active");
+				});
+				
+				
+				
+				
+				
+				
+				
+				
+				$("#record #record_header").each(function() {
+					$(this).click(function() {
+						if($(this).next("#record_body").css("display") == "none") {
+							$("#record #record_body").each(function() {
+								if($(this).css("display") != "none") {
+									$(this).prev("#record_header").click();
+								}
+							});
+							$(this).next("#record_body").slideDown(200);
+							//$(this).next("#record_body").css("display","block");
+							$(this).css("border-bottom", "none");
+							$(this).css("background", "#f4f4f4");
+							//console.log($(this).children("#record_header_button").children("#record_header_button_button").text());
+							var $button_button = $(this).children("#record_header_button").children("#record_header_button_button");
+							//$(this).children("#record_header_button").children("#record_header_button_button").text("-");
+							$button_button.html("&minus;");
+							$button_button.css("background", "#02a8f5");
+							$button_button.css("color", "#fff");
+							$button_button.css("box-shadow", " 0 0 0 2px #02a8f5 inset");
+						} else {
+							$(this).next("#record_body").slideUp(200);
+							//$(this).next("#record_body").css("display","none");
+							$(this).css("border-bottom", "1px solid #d4c4b7");
+							$(this).css("background", "");
+							var $button_button = $(this).children("#record_header_button").children("#record_header_button_button");
+							$button_button.text("+");
+							$button_button.css("background", "");
+							$button_button.css("color", "");
+							$button_button.css("box-shadow", "");
+						}
+
+					});
+
+				});
+
+				$("#record #record_body #record_body_button").each(function() {
+					$(this).children("span").first().click(function() {
+						window.open("select_result.html");
+					});
+					$(this).children("span").last().click(function() {
+
+						if(confirm("确定删除")) {
+							console.log("删除该条记录");
+						} else {
+							console.log("取消删除该条记录");
+						}
+					});
+				});
+				
+				
+				
+				
+				
+				
+				
+			}); //jquery
+		</script>
+	</body>
+
+</html>

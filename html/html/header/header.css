@@ -1,0 +1,101 @@
+@charset "utf-8";
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#header {
+	width: 100%;
+	height: 65px;
+	margin-top: 0px;
+	background-color: #293C55;
+	float: left;
+	position: absolute;
+}
+
+#logo {
+	width: 300px;
+	height: 65px;
+	text-align: center;
+	float: left;
+	position: relative;
+	margin-left: 100px;
+	margin-top: 20px;
+}
+
+#logo a span {
+	font-family: "华文行楷";
+	font-size: 30px;
+	text-decoration: none;
+	color: #FFFFFF;
+	float: left;
+}
+
+#nav1 {
+	float: left;
+	margin: 0 auto;
+	background-color: #293C55;
+	width: 650px;
+	position: absolute;
+	line-height: 65px;
+	top: 0;
+	left: 400px;
+	box-sizing: border-box;
+	z-index: 9;
+}
+
+#nav1 a {
+	padding: 0 30px;
+	float: left;
+	display: inline-block;
+	text-decoration: none;
+	color: #FFFFFF;
+	height: 65px;
+}
+
+#nav1 .active {
+	background: rgba(0, 0, 0, .2);
+}
+
+#login {
+	float: left;
+	margin: 0 auto;
+	background-color: #293C55;
+	width: 90px;
+	position: absolute;
+	line-height: 65px;
+	top: 0;
+	right: 0px;
+	box-sizing: border-box;
+	height: 65px;
+	overflow: hidden;
+}
+
+#header #login a {
+	padding: 0 2px;
+	float: left;
+	display: inline-block;
+	text-decoration: none;
+	height: 65px;
+}
+
+#header #login a span {
+	margin: 0 auto;
+	font: 12px 微软雅黑;
+	height: 65px;
+	color: #FFFFFF;
+	line-height: 65px;
+}
+
+#login i {
+	margin-top: 26px;
+	color: #fff;
+	float: left;
+	font: 12px 微软雅黑;
+	height: 65px;
+}
+
+#header #login a.active {
+	background: rgba(0, 0, 0, .2);
+}

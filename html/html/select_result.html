@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>结果显示</title>
+		<script src="../js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			
+			#box {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				height: 100%;
+				width: 100%;
+				overflow: auto;
+			}
+			
+			#fileList {
+				height: 100%;
+				width: 237px;
+				top: 0px;
+				left: 0px;
+				box-sizing: border-box;
+				background: linear-gradient(to top, rgba(116, 84, 169, 0.9) 0%, rgba(49, 126, 206, 0.9) 100%);
+				position: absolute;
+				color: #FFFFFF;
+				padding-left: 0px;
+				padding-top: 20px;
+				overflow: auto;
+			}
+			
+			#fileList_button {
+				position: absolute;
+				top: 50%;
+				margin-top: -40px;
+				left: 220px;
+				border-color: transparent transparent transparent #052040;
+				border-style: solid none solid solid;
+				border-width: 20px 0 20px 20px;
+				height: 40px;
+				width: 0;
+				cursor: pointer;
+				z-index: 999;
+			}
+			
+			#fileList_button:hover span {
+				opacity: 1;
+			}
+			
+			#fileList_button span.open {
+				transform: rotate(-180deg);
+			}
+			
+			#fileList_button span {
+				position: absolute;
+				top: 50%;
+				left: -13px;
+				margin-top: -4px;
+				border-color: transparent transparent transparent #fff;
+				border-style: solid none solid solid;
+				border-width: 4px 0 4px 6px;
+				height: 0;
+				width: 0;
+				opacity: .7;
+			}
+			
+			#box1 {
+				position: fixed;
+				box-sizing: border-box;
+				height: 100%;
+				left: 220px;
+				top: 0px;
+				width: 83%;
+				background: #F2F2F2;
+				z-index: 1;
+				padding-left: 20px;
+				overflow: auto;
+			}
+			
+			#show_msg {
+				box-sizing: border-box;
+				position: relative;
+				top: 0px;
+				left: 0px;
+				height: 100px;
+				/*border: 1px solid #0088CC;*/
+				color: #fff;
+				background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+				padding: 10px;
+			}
+			
+			#show_msg_button {
+				position: absolute;
+				left: 50%;
+				margin-left: -40px;
+				top: 70px;
+				border-color: transparent transparent transparent #052040;
+				border-style: solid none solid solid;
+				border-width: 20px 0 20px 20px;
+				height: 40px;
+				width: 0;
+				cursor: pointer;
+				z-index: 999;
+				transform: rotate(90deg);
+				display: none;
+			}
+			
+			#show_msg_button:hover span {
+				opacity: 1;
+			}
+			
+			#show_msg_button span.open {
+				transform: rotate(-180deg);
+			}
+			
+			#show_msg_button span {
+				position: absolute;
+				top: 50%;
+				left: -13px;
+				margin-top: -4px;
+				border-color: transparent transparent transparent #fff;
+				border-style: solid none solid solid;
+				border-width: 4px 0 4px 6px;
+				height: 0;
+				width: 0;
+				opacity: .7;
+			}
+			
+			#radios {
+				box-sizing: border-box;
+				position: relative;
+				top: 0px;
+				left: 0px;
+				height: 100px;
+				width: 100%;
+				border: 1px solid #0088CC;
+				background: #f2f2f2;
+				z-index: 1;
+				padding: 10px;
+			}
+			
+			#radios button {
+				color: #FFFFFF;
+				height: 58px;
+				cursor: pointer;
+				border-radius: 10px;
+				padding-left: 15px;
+				padding-right: 15px;
+				font-size: 16px;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+			
+			#radios button:hover {
+				color: #000000;
+			}
+			
+			#file_msg {
+				box-sizing: border-box;
+				position: relative;
+				top: 0;
+				left: 0px;
+				width: 100%;
+				border: 1px solid #000000;
+				/*background: #449D44;*/
+				background: #fff;
+				z-index: 1;
+				padding: 10px 10px;
+				padding-right: 27px;
+			}
+			
+			#Treetable {
+				position: relative;
+				border: 1px solid #e6e6e6;
+				margin: 10px 0;
+				box-sizing: border-box;
+				background: #000000;
+				margin: 20px;
+			}
+			
+			#file_table {
+				line-height: 22px;
+				font-size: 14px;
+				color: #666;
+				overflow-x: hidden;
+			}
+			
+			#table_head {
+				border-width: 0 0 1px;
+				border-style: solid;
+				border-color: #e6e6e6;
+				background: #f2f2f2;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			
+			#table_head table th {
+				position: relative;
+				padding: 5px 0px;
+				min-height: 20px;
+				line-height: 20px;
+				font-size: 14px;
+				border-right: 1px solid #e6e6e6;
+			}
+			
+			.table_head_div {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 215px;
+				text-align: left;
+				cursor: default;
+				-moz-user-select: none;
+			}
+			
+			.table_head_div_num {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 100px;
+				text-align: left;
+				cursor: default;
+				-moz-user-select: none;
+			}
+			
+			#table_body {
+				background: #fff;
+			}
+			
+			#table_body table th {
+				position: relative;
+				padding: 5px 0px;
+				min-height: 20px;
+				line-height: 20px;
+				font-size: 14px;
+				border-right: 1px solid #e6e6e6;
+				border-bottom: 1px solid #e6e6e6;
+			}
+			
+			.table_body_div_one_haschild {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				padding-left: 30px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 215px;
+				text-align: left;
+				cursor: pointer;
+				-moz-user-select: none;
+			}
+			
+			.table_body_div_two {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				padding-left: 30px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 215px;
+				text-align: left;
+				cursor: default;
+				-moz-user-select: none;
+			}
+			
+			.table_body_div_one_none {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				padding-left: 30px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 215px;
+				text-align: left;
+				cursor: default;
+			}
+			
+			.table_body_div {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 215px;
+				text-align: left;
+				cursor: default;
+				-moz-user-select: none;
+			}
+			
+			.table_body_div_num {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 15px;
+				position: relative;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				box-sizing: border-box;
+				width: 100px;
+				text-align: left;
+				cursor: default;
+				-moz-user-select: none;
+			}
+			
+			.file_open {
+				position: absolute;
+				top: 50%;
+				left: 3px;
+				margin-top: -6px;
+				margin-right: 10px;
+				margin-left: 10px;
+				border-color: transparent transparent transparent #000000;
+				border-style: solid none solid solid;
+				border-width: 6px 0 6px 8px;
+				height: 0;
+				width: 0px;
+				opacity: .7;
+				cursor: pointer;
+			}
+			
+			.file_two {
+				line-height: 10px;
+				font-size: 20px;
+			}
+			
+			#overflow_msg_1 {
+				z-index: 19891022;
+				position: absolute;
+				width: 432px;
+				left: 0px;
+				top: 0px;
+				display: none;
+				background: 0 0;
+				box-shadow: none;
+				border: none;
+				padding: 0;
+				margin: 0;
+				pointer-events: auto;
+			}
+			
+			#overflow_msg {
+				position: relative;
+				box-sizing: border-box;
+				background: #e6e6e6;
+				padding-left: 5px;
+				overflow: auto;
+				cursor: default;
+				color: #666;
+				font-size: 14px;
+				line-height: 28px;
+				margin: 0 auto;
+				top: 0px;
+				left: 0px;
+				border: 1px solid red;
+				word-wrap: break-word;
+				width: 432px;
+				z-index: 1000;
+				-moz-user-select: none;
+				display: block;
+				min-height: 40px;
+			}
+			
+			#fileList_1 {
+				position: relative;
+				height: 50px;
+				-moz-user-select: none;
+				cursor: pointer;
+				padding: 10px;
+				padding-left: 15px;
+				line-height: 30px;
+				margin: 0 auto;
+				border: 0px;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+			
+			#fileList_3 {
+				position: relative;
+				height: 50px;
+				-moz-user-select: none;
+				cursor: pointer;
+				padding: 10px;
+				padding-left: 15px;
+				line-height: 30px;
+				margin: 0 auto;
+				border: 0px;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+			
+			#fileList_3 a {
+				text-decoration: none;
+				color: #c2bdbd;
+			}
+			
+			#fileList_1:hover {
+				border-left: 5px solid #08dcd2;
+				background-color: rgba(33, 33, 33, 0.1);
+			}
+			
+			#fileList_1.active {
+				border-left: 5px solid #08dcd2;
+				background-color: rgba(33, 33, 33, 0.1);
+			}
+			
+			#fileList_1 a {
+				text-decoration: none;
+				color: #c2bdbd;
+			}
+			
+			#fileList_1:hover a {
+				color: #fff;
+			}
+			
+			#fileList_1.active a {
+				color: #fff;
+			}
+			
+			#fileList_2 {
+				width: 220px;
+				position: absolute;
+				box-sizing: border-box;
+				height: 100%;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			<div id="fileList_2">
+				<div id="fileList">
+
+					<div id="fileList_3">
+						<a href="#">文件列表</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">1</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">2</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">3333333333333333333333333333333333333</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">41</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">5</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">6</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">61</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">62</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">63</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">64</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">65</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">66</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">67</a>
+					</div>
+
+					<div id="fileList_1">
+						<a href="#">68</a>
+					</div>
+					<div id="fileList_1">
+						<a href="#">69</a>
+					</div>
+				</div>
+
+			</div>
+			<div id="fileList_button">
+				<span id=""></span>
+			</div>
+			<div id="box1">
+				<div id="show_msg">
+					<span>
+						请选择文件进行查看
+					</span>
+					<div id="show_msg_button">
+						<span></span>
+					</div>
+				</div>
+				<div id="radios">
+					<button id="button_openAll" style="background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%) !important;">全部展开</button>
+					<button id="next_file" style="background-image: linear-gradient( 135deg, #2AFADF 10%, #4C83FF 100%) !important;">下一个文件</button>
+					<button id="prev_file" style="background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%) !important;">上一个文件</button>
+					<button id="prev_file" style="background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%) !important;">返回</button>
+					<button id="refresh" style="background-image: linear-gradient( 135deg, #EE9AE5 10%, #5961F9 100%) !important;">刷新</button>
+				</div>
+
+				<div id="file_msg">
+					检索信息----树形表格
+
+					<div id="Treetable">
+						<div id="file_table">
+							<div id="table_head">
+								<table cellpadding="0" cellspacing="0" border="2px solid red">
+									<thead>
+										<tr>
+											<th>
+
+												<div class="table_head_div"><span>规则名</span></div>
+											</th>
+											<th>
+												<div class="table_head_div_num"><span>数量</span></div>
+											</th>
+											<th>
+												<div class="table_head_div"><span>结果</span></div>
+											</th>
+											<th>
+												<div class="table_head_div"><span>项目名</span></div>
+											</th>
+											<th>
+												<div class="table_head_div"><span>提交时间</span></div>
+											</th>
+											<th>
+												<div class="table_head_div"><span>状态</span></div>
+											</th>
+
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="table_body">
+								<table cellpadding="0" cellspacing="0" border="2px solid red">
+									<thead>
+										<tr>
+											<th>
+
+												<div class="table_body_div_one_haschild">
+													<span class="file_open"> </span>
+													<span>特征数</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>3</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>7</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>倒圆角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>5</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>基准坐标系</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>8</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>导斜角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>13555555555555555555555555555555555555555555555555555555555555555</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr>
+											<th>
+
+												<div class="table_body_div_one_none">
+
+													<span>报告外部引用</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>的空间符合规定看了就反过来看的分级管理的风格肯定就发给</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr>
+											<th>
+
+												<div class="table_body_div_one_haschild">
+													<span class="file_open"> </span>
+													<span>特征数</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>3</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>7</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>倒圆角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>5</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>基准坐标系</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>8</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>导斜角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>13555555555555555555555555555555555555555555555555555555555555555</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr>
+											<th>
+
+												<div class="table_body_div_one_haschild">
+													<span class="file_open"> </span>
+													<span>特征数</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>3</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>7</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>倒圆角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>5</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>基准坐标系</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>8</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>导斜角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>13555555555555555555555555555555555555555555555555555555555555555</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr>
+											<th>
+
+												<div class="table_body_div_one_haschild">
+													<span class="file_open"> </span>
+													<span>特征数</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>3</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>7</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>倒圆角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>5</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>基准坐标系</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>8</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>导斜角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>13555555555555555555555555555555555555555555555555555555555555555</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr>
+											<th>
+
+												<div class="table_body_div_one_haschild">
+													<span class="file_open"> </span>
+													<span>特征数</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>3</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>7</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>倒圆角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>5</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>基准坐标系</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>8</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+										<tr style="display: none;">
+											<th>
+
+												<div class="table_body_div_two">
+													<span class="file_two">
+														&raquo;
+													</span>
+													<span>导斜角</span>
+												</div>
+											</th>
+											<th>
+												<div class="table_body_div_num"><span>1</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>13555555555555555555555555555555555555555555555555555555555555555</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>无</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>2019-1-2</span></div>
+											</th>
+											<th>
+												<div class="table_body_div"><span>通过</span></div>
+											</th>
+
+										</tr>
+
+									</thead>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="overflow_msg_1">
+					<div id="overflow_msg">
+						2
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function() {
+				var ishide = true;
+				$("#fileList_button").click(function() {
+					if(ishide) {
+						$("#fileList").animate({
+							left: "-220"
+						}, 600);
+						$(this).animate({
+							left: "0"
+						}, 600);
+						$("#box1").animate({
+							"left": "0",
+							"width": "100%"
+						}, 600);
+						ishide = false;
+						$("#show_msg_button").css("margin-left", "0");
+						$($(this).children("span")[0]).attr("class", "open");
+						show_overflow_msg_1(0, -220);
+					} else {
+						$("#fileList").animate({
+							left: "0"
+						}, 600);
+						$(this).animate({
+							left: "220"
+						}, 600);
+						$("#box1").animate({
+							"left": "220",
+							"width": "83%"
+						}, 600);
+						$($(this).children("span")[0]).attr("class", "");
+						$("#show_msg_button").css("margin-left", "-40px");
+						ishide = true;
+						show_overflow_msg_1(0, 220);
+					}
+				});
+				$("#show_msg").mouseover(function() {
+					$("#show_msg_button").css("display", "block");
+				});
+				$("#show_msg").mouseout(function() {
+					$("#show_msg_button").css("display", "none");
+				});
+				$("#radios").mouseover(function() {
+					$("#show_msg_button").css("display", "block");
+				});
+				$("#radios").mouseout(function() {
+					$("#show_msg_button").css("display", "none");
+				});
+				var ishide1 = true;
+				$("#show_msg_button").click(function() {
+					if(ishide1) {
+						$("#show_msg").animate({
+							top: "-100"
+						}, 600);
+						$("#radios").animate({
+							top: "-100"
+						}, 600);
+						$("#file_msg").animate({
+							top: "-100"
+						}, 600);
+						$($(this).children("span")[0]).attr("class", "open");
+						ishide1 = false;
+						show_overflow_msg_1(-100, 0);
+					} else {
+						$("#show_msg").animate({
+							top: "0"
+						}, 600);
+						$("#radios").animate({
+							top: "0"
+						}, 600);
+						$("#file_msg").animate({
+							top: "0"
+						}, 600);
+						$($(this).children("span")[0]).attr("class", "");
+						ishide1 = true;
+						show_overflow_msg_1(100, 0);
+					}
+				});
+				$("#table_body tr").each(function() {
+					$(this).mouseover(function() {
+						$(this).css("background", "#f2f2f2")
+					});
+					$(this).mouseout(function() {
+						$(this).css("background", "#fff")
+					});
+				});
+				$("#table_body .file_open").each(function() {
+					$(this).click(function() {
+						var file_open = $(this).css("transform");
+						if(file_open == "matrix(0, 1, -1, 0, 0, 0)" || file_open == "matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)") {
+							$(this).css("transform", "rotate(0deg)");
+							var num = $(this).parent("div").parent("th").next("th").text();
+							num = parseInt(num);
+							var $hide_line = $(this).parent("div").parent("th").parent("tr").next("tr");
+							for(var i = 0; i < num; i++) {
+								$hide_line.hide();
+								$hide_line = $hide_line.next("tr");
+							}
+							show_overflow_msg_1(0, 0);
+						} else {
+							$(this).css("transform", "rotate(90deg)");
+							var num = $(this).parent("div").parent("th").next("th").text();
+							num = parseInt(num);
+							var $hide_line = $(this).parent("div").parent("th").parent("tr").next("tr");
+							for(var i = 0; i < num; i++) {
+								$hide_line.show(50);
+								$hide_line = $hide_line.next("tr");
+							}
+							show_overflow_msg_1(0, 0);
+						}
+					});
+				});
+				$("#table_body .table_body_div_one_haschild").each(function() {
+					$($(this).children("span")[1]).click(function() {
+						var $file = $(this).prev();
+						return $file.click();
+					});
+				});
+
+				var button_isOpen = true;
+				$("#button_openAll").click(function() {
+					if(button_isOpen) {
+						$(this).html("全部折叠");
+						button_isOpen = false;
+						$("#table_body .file_open").each(function() {
+							var file_open = $(this).css("transform");
+							if(file_open == "matrix(0, 1, -1, 0, 0, 0)" || file_open == "matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)") {} else {
+								return $(this).click();
+							}
+						});
+					} else {
+						$(this).html("全部展开");
+						button_isOpen = true;
+						$("#table_body .file_open").each(function() {
+							var file_open = $(this).css("transform");
+							if(file_open == "matrix(0, 1, -1, 0, 0, 0)" || file_open == "matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)") {
+								return $(this).click();
+							} else {
+
+							}
+						});
+					}
+				});
+				$("#prev_file").click(function(){
+					var $a;
+					$("#fileList #fileList_1").each(function(){
+						if($(this).attr("class")=="active"){
+							$a=$(this)
+							return false;
+						}
+						
+					});
+					if($a){
+						return $a.prev("#fileList_1").click();
+					}
+					
+					
+				});
+				$("#next_file").click(function(){
+					var $a;
+					$("#fileList #fileList_1").each(function(){
+						if($(this).attr("class")=="active"){
+							$a=$(this)
+							return false;
+						}
+						
+					});
+					if($a){
+						return $a.next("#fileList_1").click();
+					}
+					
+					
+					
+				});
+				$("#refresh").click(function(){
+					
+					
+					
+				});
+				
+				
+				
+				
+				
+				
+				$("#table_body .table_body_div").each(function() {
+					var bix1_dc = $("#box1").scrollTop();
+					$("#box1").scrollTop(0);
+					var div_top = $(this).offset().top;
+					var div_left = $(this).offset().left;
+					$(this).click(function(e) {
+						var span_width = $($(this).children("span")[0]).width();
+						//兼容ie浏览器
+						if(window.ActiveXObject || "ActiveXObject" in window) {
+							if(span_width >= 157) {
+								$("#overflow_msg").html($(this).html());
+								$("#overflow_msg_1").show();
+								$("#overflow_msg_1").offset(function(index, oldOffset) { //通过方法来赋值
+									//定义对象
+									var newOffset = new Object();
+									//赋值
+									newOffset.top = div_top;
+									newOffset.left = div_left;
+									//返回结果
+									return newOffset;
+								});
+								e.stopPropagation();
+							}
+						} else {
+							if(span_width >= 185) {
+								$("#overflow_msg").html($(this).html());
+								$("#overflow_msg_1").show();
+								$("#overflow_msg_1").offset(function(index, oldOffset) { //通过方法来赋值
+									//定义对象
+									newOffset = new Object();
+									//赋值
+									newOffset.top = div_top - $("#box1")[0].scrollTop - 5;
+									newOffset.left = div_left;
+									//返回结果
+									return newOffset;
+								});
+								//停止向父元素响应
+								e.stopPropagation();
+							}
+						}
+					});
+					$("#box1").scrollTop(bix1_dc);
+				});
+
+				function show_overflow_msg_1(x, y) {
+					//console.log(22);
+					var bix1_dc = $("#box1").scrollTop();
+					$("#box1").scrollTop(0);
+					$("#table_body .table_body_div").each(function() {
+						$(this).unbind("click");
+					});
+					$("#table_body .table_body_div").each(function() {
+
+						var div_top = $(this).offset().top;
+						var div_left = $(this).offset().left;
+						$(this).click(function(e) {
+							var span_width = $($(this).children("span")[0]).width();
+							//兼容ie浏览器
+							if(window.ActiveXObject || "ActiveXObject" in window) {
+								if(span_width >= 157) {
+									$("#overflow_msg_1").show();
+									$("#overflow_msg").html($(this).html());
+									$("#overflow_msg_1").offset(function(index, oldOffset) { //通过方法来赋值
+										//定义对象
+										var newOffset = new Object();
+										//赋值
+										newOffset.top = div_top - $("#box1")[0].scrollTop - 5 + x;
+										newOffset.left = div_left + y;
+										//返回结果
+										return newOffset;
+
+									});
+									e.stopPropagation();
+								}
+							} else {
+								if(span_width >= 185) {
+									$("#overflow_msg_1").show();
+									$("#overflow_msg").html($(this).html());
+									$("#overflow_msg_1").offset(function(index, oldOffset) { //通过方法来赋值
+										//定义对象
+										var newOffset = new Object();
+										//赋值
+										newOffset.top = div_top - $("#box1")[0].scrollTop - 5 + x;
+										newOffset.left = div_left + y;
+										//返回结果
+										return newOffset;
+
+									});
+									e.stopPropagation();
+								}
+							}
+						});
+					});
+					$("#box1").scrollTop(bix1_dc);
+				}
+				//点击其余地方隐藏overflow_msg
+				$(document).ready(function() {
+					$('body').click(function(e) {
+						var _con = $("#overflow_msg_1");
+						if(!_con.is(e.target) && _con.has(e.target).length === 0) { // Mark 1
+							$("#overflow_msg_1").hide();
+						}
+					});
+				});
+				$("#fileList #fileList_1").each(function() {
+					$(this).click(function() {
+						$("#fileList #fileList_1").each(function() {
+							$(this).attr("class", "");
+
+						});
+						$(this).attr("class", "active");
+						$("#show_msg>span").html($($(this).children("a")[0]).html());
+						
+					});
+				});
+				$("#fileList_3").click(function() {
+					$("#fileList #fileList_1").each(function() {
+						$(this).attr("class", "");
+
+					});
+					
+					$("#show_msg>span").html("请选择文件进行查看");
+
+				});
+				
+				
+				
+
+			}); //jQuery-----------
+		</script>
+
+</html>
