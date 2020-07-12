@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/ycit/controller/UserInfoController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/ycit/mapper/UserInfoMapper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/ycit/text/Test.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/ycit/util/HelpDev.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/ycit/util/UserException.java" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

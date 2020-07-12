@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.SubmitRuleRecordMapper">
+
+    <resultMap id="BaseResultMap" type="SubmitRuleRecord">
+
+        <id column="tsrrid" property="srrId" jdbcType="INTEGER"/>
+        <result column="srrsrid" property="srrsrId" jdbcType="INTEGER"/>
+        <result column="srrruleid" property="srrRuleId" jdbcType="INTEGER"/>
+
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        tsrrid, srrsrid, srrruleid
+    </sql>
+
+    <insert id="addSRR" parameterType="SubmitRuleRecord">
+
+        insert into submitrulerecord(srrsrid,srrruleid)
+        values (#{srrsrId},#{srrRuleId})
+
+    </insert>
+
+    <!--增加测试记录的 测试选项记录-->
+    <insert id="addSRRList" parameterType="java.util.List">
+        insert into submitrulerecord(srrsrid,srrruleid) values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.srrsrId},
+            #{item.srrRuleId}
+            )
+        </foreach>
+    </insert>
+
+
+    <!--获取用户测试记录对应的测试选项名-->
+    <select id="queryRuleRecordListBysrid" resultMap="BaseResultMap" parameterType="int">
+        select * from submitrulerecord where srrsrid = #{srId}
+    </select>
+
+    <!--根据测试记录id，删除本次测试的测试选项信息-->
+    <delete id="deleteRuleRecordBySrId" parameterType="int">
+        delete from submitrulerecord where srrsrid = #{srId}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

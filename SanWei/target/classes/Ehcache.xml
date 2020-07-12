@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+    <diskStore path="D:\Ehcache"/>
+    <!--开启mybatis二级缓存-->
+    <defaultCache
+            maxElementsInMemory="1000"
+            maxElementsOnDisk="1000000"
+            eternal="false"
+            overflowToDisk="false"
+            timeToIdleSeconds="100"
+            timeToLiveSeconds="100"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+</ehcache>

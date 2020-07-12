@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.SubmitFileRecordMapper">
+
+    <resultMap id="BaseResultMap" type="submitFileRecord">
+        <id column="sfrid" property="sfrId" jdbcType="INTEGER"/>
+        <result column="sfrsrid" property="sfrsrId" jdbcType="INTEGER"/>
+        <result column="sfrfilename" property="sfrFileName" jdbcType="VARCHAR"/>
+        <result column="sfrfilepath" property="sfrFilePath" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        sfrid, sfrsrid, sfrfilename,sfrfilepath
+    </sql>
+    <!--插入一个SubmitFileRecord-->
+    <insert id="addSFS" parameterType="submitFileRecord">
+        insert into submitfilerecord(sfrsrid,sfrfilename,sfrfilepath)
+        values (#{sfrsrId},#{sfrFileName},#{sfrFilePath})
+
+    </insert>
+
+    <!--插入SubmitFileRecord集合-->
+    <insert id="addSFSList" parameterType="java.util.List">
+        insert into submitfilerecord(sfrsrid,sfrfilename,sfrfilepath) values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.sfrsrId},
+            #{item.sfrFileName},
+            #{item.sfrFilePath}
+            )
+        </foreach>
+    </insert>
+
+    <!--获取用户测试记录对应的文件名-->
+    <select id="queryFileRecordListBysrid" parameterType="int" resultMap="BaseResultMap">
+        select * from submitfilerecord where sfrsrid=#{srId}
+    </select>
+
+    <!--删除此次测试记录的文件记录-->
+    <delete id="deleteFileRecordBySrId" parameterType="int">
+        delete from submitfilerecord where sfrsrid=#{srId}
+    </delete>
+
+    <select id="queryFileRecordBySfrId" parameterType="int" resultMap="BaseResultMap">
+
+        select * from submitfilerecord where sfrid=#{sfrId}
+
+    </select>
+
+
+
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

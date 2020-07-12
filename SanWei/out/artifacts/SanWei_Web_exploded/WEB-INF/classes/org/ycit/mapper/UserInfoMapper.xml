@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.UserInfoMapper">
+<resultMap id="BaseResultMap" type="userinfo">
+    <id column="userid" property="userId" jdbcType="INTEGER"/>
+    <result column="userpwd" property="userPwd" jdbcType="VARCHAR"/>
+    <result column="username" property="userName" jdbcType="VARCHAR"/>
+    <result column="usersex" property="userSex" jdbcType="VARCHAR"/>
+    <result column="userbirthday" property="userBirthday" jdbcType="VARCHAR"/>
+    <result column="useraddress" property="userAddress" jdbcType="VARCHAR"/>
+    <result column="usertel" property="userTel" jdbcType="VARCHAR"/>
+    <result column="useremail" property="userEmail" jdbcType="VARCHAR"/>
+
+</resultMap>
+   <sql id="Base_Column_List">
+   userid, userpwd, username, usersex, userbirthday, useraddress, usertel, useremail
+ </sql>
+
+
+<!--  客户端ajax方式提交添加用户信息-->
+<!--    将值回写可以配置useGeneratedKeys="true" keyProperty="userId"-->
+	<insert id="addUserInfo" parameterType="org.ycit.entity.UserInfo" >
+		insert into userinfo(userpwd,username,usersex,userbirthday,useraddress,usertel,useremail)
+		values(#{userPwd},#{userName},#{userSex},#{userBirthday},#{userAddress},#{userTel},#{userEmail})
+	</insert>
+
+    <!--根据手机号获取用户信息-->
+	<select id="getUserInfoByUserTel" parameterType="String" resultType="userinfo">
+		select * from userinfo where usertel=#{userTel}
+	</select>
+    <!--根据用户id获取用户信息-->
+    <select id="getUserInfoByUserId" parameterType="int" resultType="userinfo">
+		select * from userinfo where userid=#{userId}
+	</select>
+
+
+
+
+
+
+
+
+
+
+    <!-- 前台用户登录检查用户信息 -->
+    <select id="checkLogin" parameterType="string" resultType="string">
+		select userpwd from userInfo where usertel=#{user_name}
+	</select>
+
+    <!--更新管理员信息-->
+    <update id="updateUserInfoByUserId" parameterType="userinfo">
+        update userinfo
+        <set>
+            <if test="userPwd != null and userPwd!=''">
+                userpwd = #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                username = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                usersex = #{userSex,jdbcType=VARCHAR},
+            </if>
+            <if test="userBirthday != null">
+                userbirthday = #{userBirthday,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddress != null">
+                useraddress = #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null">
+                usertel = #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                useremail = #{userEmail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where userid = #{userId,jdbcType=INTEGER}
+    </update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.RuleMapper">
+    <!--使用的是Ehcache
+
+    cache  type="org.mybatis.caches.ehcache.EhcacheCache">
+         通过property覆盖Ehcache.xml中的值
+       <property name="maxElementsInMemory" value="2000"/>
+        <property name="maxElementsOnDisk" value="3000"/>
+    </cache> -->
+   <!-- <cache type="org.ycit.util.HelpDev.RedisCache"></cache>
+-->
+    <resultMap id="BaseResultMap" type="rule">
+
+        <id column="ruleid" property="ruleId" jdbcType="INTEGER"/>
+        <result column="rulename" property="ruleName" jdbcType="VARCHAR"/>
+        <result column="parentid" property="parentId" jdbcType="INTEGER"/>
+        <result column="rulepath" property="rulePath" jdbcType="VARCHAR"/>
+        <result column="enabled" property="enabled" jdbcType="BIT"/>
+        <result column="isparent" property="isParent" jdbcType="BIT"/>
+        <result column="englishname" property="englishName" jdbcType="VARCHAR"/>
+        <result column="checker" property="checker" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <resultMap id="RuleWithChildren" type="Rule" extends="BaseResultMap">
+        <collection property="children" ofType="Rule"
+                    select="org.ycit.mapper.RuleMapper.getAllRulesByParentId" column="ruleid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ruleid, rulename, parentid, rulepath, enabled, isparent,englishname,checker
+    </sql>
+    <!--获取所有的规则信息-->
+    <select id="getAllRulesByParentId" resultMap="RuleWithChildren">
+        select ruleid,rulename,parentid from rule where parentId=#{pid} AND enabled =1;
+    </select>
+
+    <!--根据规则id获取规则名-->
+    <select id="queryRuleNameByRuleId" parameterType="int" resultType="string">
+        select rulename from rule where ruleid = #{ruleId}
+    </select>
+
+    <!--根据ruleId获取所有的checker名称-->
+    <select id="queryCheckerByRuleId" parameterType="int" resultType="string">
+        select checker from rule where ruleid = #{ruleId}
+    </select>
+
+
+    <select id="getRuleByEnglishName" parameterType="string" resultMap="BaseResultMap">
+        select * from rule where englishname=#{englishName}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

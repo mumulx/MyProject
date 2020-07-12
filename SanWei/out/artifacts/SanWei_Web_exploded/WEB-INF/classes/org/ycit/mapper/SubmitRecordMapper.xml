@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.SubmitRecordMapper">
+
+    <resultMap id="BaseResultMap" type="SubmitRecord">
+
+        <id column="srid" property="srId" jdbcType="INTEGER"/>
+        <result column="sruserid" property="srUserId" jdbcType="INTEGER"/>
+        <result column="srdate" property="srDate" jdbcType="VARCHAR"/>
+        <result column="srfilenumber" property="srFileNumber" jdbcType="INTEGER"/>
+        <result column="srrulenumber" property="srRuleNumber" jdbcType="INTEGER"/>
+        <result column="srfilesaveurl" property="srFileSaveURL" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        srid, sruserid, srdate,srfilenumber,srrulenumber,srfilesaveurl
+    </sql>
+
+    <!--增加测试记录-->
+    <insert id="addSR" parameterType="SubmitRecord" useGeneratedKeys="true" keyProperty="srId" keyColumn="srid">
+        insert into submitrecord(sruserid,srdate,srfilenumber,srrulenumber,srfilesaveurl)
+        values (#{srUserId},#{srDate},#{srFileNumber},#{srRuleNumber},#{srFileSaveURL})
+    </insert>
+
+    <!--获取当前页用户测试记录-->
+    <select id="queryRecordListByUserId" resultMap="BaseResultMap">
+        select * from submitrecord where sruserid=#{param1} ORDER BY srid desc limit #{param2},#{param3}
+    </select>
+
+    <!--获取用户测试记录总数-->
+    <select id="queryRecordCountByUserId" resultType="int" parameterType="int">
+        select count(1) from submitrecord where sruserid=#{userId}
+    </select>
+
+    <!--删除本次测试记录，根据测试记录id-->
+    <delete id="deleteRecordBySrId" parameterType="int">
+        delete from submitrecord where srid=#{srId}
+    </delete>
+
+    <!--根据测试记录id获取测试记录所有信息-->
+    <select id="queryRecordBySrId" parameterType="int" resultMap="BaseResultMap">
+        select * from submitrecord where srid=#{srId}
+    </select>
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

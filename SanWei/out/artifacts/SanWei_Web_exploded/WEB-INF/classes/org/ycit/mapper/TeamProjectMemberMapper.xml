@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.TeamProjectMemberMapper">
+
+
+
+    <resultMap id="BaseResultMap" type="teamProjectMember">
+
+        <id column="tpmid" property="tpmId" jdbcType="INTEGER"/>
+        <result column="tpmtpid" property="tpmTpId" jdbcType="INTEGER"/>
+        <result column="tpmuserid" property="tpmUserId" jdbcType="INTEGER"/>
+        <result column="tpmidentity" property="tpmIdentity" jdbcType="VARCHAR"/>
+        <result column="tpmname" property="tpmName" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        tpmid, tpmtpid, tpmuserid, tpmidentity,tpmname
+    </sql>
+
+    <!--自动回写项目id-->
+    <insert id="add" parameterType="teamProjectMember">
+        insert into teamProjectMember(tpmtpId,tpmuserid,tpmidentity,tpmname)values (#{tpmTpId},#{tpmUserId},#{tpmIdentity},#{tpmName})
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

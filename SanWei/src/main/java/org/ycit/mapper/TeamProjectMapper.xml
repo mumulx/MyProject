@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：该mapper.xml映射文件的唯一标识符  -->
+<mapper namespace="org.ycit.mapper.TeamProjectMapper">
+    <resultMap id="BaseResultMap" type="teamProject">
+
+        <id column="tpid" property="tpId" jdbcType="INTEGER"/>
+        <result column="tpname" property="tpName" jdbcType="VARCHAR"/>
+        <result column="tpmsg" property="tpMsg" jdbcType="VARCHAR"/>
+        <result column="tpdate" property="tpDate" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        tpid, tpname, tpmsg, tpdate
+    </sql>
+
+<!--自动回写项目id-->
+    <insert id="add" parameterType="teamproject"  useGeneratedKeys="true" keyProperty="tpId" keyColumn="tpid">
+        insert into teamProject(tpname,tpmsg,tpdate)values (#{tpName},#{tpMsg},#{tpDate})
+    </insert>
+
+    <select id="queryUserTeamProjectListByUserId" resultMap="BaseResultMap">
+        select * from teamproject where tpid in(select tpmtpid from teamprojectmember where tpmuserid = #{param1}) ORDER BY tpdate ASC limit #{param2},#{param3}
+
+    </select>
+
+    <select id="queryUserTeamProjectListCount" parameterType="int" resultType="int">
+        select count(1)from teamproject where tpid in(select tpmtpid from teamprojectmember where tpmuserid = #{userId})
+    </select>
+
+
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

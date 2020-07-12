@@ -1,0 +1,76 @@
+
+body{
+    margin-top:70px;
+    background: #E3E7EA;
+}
+.team_div_btn{
+
+    margin-top: 2em;
+    margin-bottom: 2px;
+}
+.team_div_btn button:focus,
+.team_div_btn_button{
+    border-radius: 8px;
+    background: #a1abc2;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+    color: #fff;
+}
+
+.team_div_btn button:hover{
+    color: #6c6d6f;
+    background: #a1abc2;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+}
+
+
+.team_div_btn .col-md-7{
+
+
+    padding-left: 0px;
+    padding-right: 5px;
+}
+.team_div_btn .col-md-5{
+
+
+    padding-left: 5px;
+    padding-right: 0px;
+}
+#team_div {
+    margin-top: 1em;
+
+}
+.thumbnail p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #6c6d6f;
+
+}
+.thumbnail{
+    border-radius:13px;
+    transition: all 0.2s ease-in-out;
+    border: 0px;
+}
+.thumbnail:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 20px 2px #ccc;
+    transition: all 0.2s ease-in-out;
+    border: 0px;
+}
+
+.breadcrumb{
+    margin-bottom: 3em;
+    background: #E3E7EA;
+    border-bottom: 1px solid #d4c4b7;
+}
+
+.create_team .create_team_big{
+
+    font-size: 160px;
+    text-align: center;
+    color: #dcdcdc;
+    line-height: 133px;
+}
